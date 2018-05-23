@@ -7,9 +7,10 @@
 <title>Register Page</title>
 </head>
 <body>
-<form action="register" method ="post">
+<h3 style="color:red">${registrationError}</h3>
+<form action="RegisterServlet" method ="post">
 	<p>
-		<label for ="UserName">Name</label><input name ="UserName" type ="text" value="${param.UserName}"/>
+		<label for ="UserName">Name</label> <input name ="UserName" type ="text" value="${param.UserName}"/>
 	</p>
 	<p>
 		<label for="Email">Email</label> <input name="Email" type="text"
@@ -19,8 +20,15 @@
 		<label for="Password">Password</label> <input name="Password" type="password"
 				value="${param.Password}" />
 	</p>
+
 	<p>
-		<button name= "login" type = "submit">Sign In</button>
+		<input type="radio" name="Household" value ="Create" checked = "checked">Create Household
+	</p>
+	<p>
+		<input type="radio" name="Household" value ="Join">Join Household
+	</p>
+	<p>
+		<button name= "continue" type = "submit">Continue</button>
 	</p>
 </form>
 </body>
