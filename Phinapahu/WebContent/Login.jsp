@@ -9,10 +9,10 @@
 </head>
 <body>
 
-<form action="login" method ="post">
+<form action="LoginServlet" method ="post">
 	<p>
-		<label for="Email">Email</label> <input name="Email" type="text"
-				value="${param.Email}" />
+		<label for="UserName">UserName</label> <input name="UserName" type="text"
+				value="${param.UserName}" />
 				
 	</p>
 	<p>
@@ -20,10 +20,10 @@
 				value="${param.Password}" />
 	</p>
 	<p>
-		<button name= "login" type = "submit">Login</button>
+		<button name= "login" type = "submit">Sign In</button>
 	</p>
 </form>
-<a href = "Register.jsp">Register Now</a>
+<a href = "Register.jsp">Sign Up</a>
 
 </body>
 </html>
