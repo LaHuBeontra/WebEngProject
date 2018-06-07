@@ -21,7 +21,6 @@ public class RegisterServlet extends HttpServlet {
      */
     public RegisterServlet() {
         super();
-        
     }
 
 	/**

@@ -3,13 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
 <HEAD>
+
 <TITLE>Create Household</TITLE>
+
 <SCRIPT language="javascript">
 var counter = 0;
 function add(type) {
 
 	//Create an input type dynamically.
-	
+
 	var element = document.createElement("input");
 
 	//Assign different attributes to the element.
@@ -27,6 +29,7 @@ function add(type) {
 	foo.appendChild(element);
 
 }
+
 //Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
 function textareaReplaceLineBreaks(){
 	document.getElementById("invitationText").value = document.getElementById("invitationText").value.replace(/(\r\n|\n)/g, "<br/>");
@@ -42,6 +45,7 @@ Please enter a name for the Household<br>
 		<input name ="HouseholdName" type ="text" value="${param.HouseholdName}"/>
 	</p>
 Click on Add Email to add Email Addresses of future household members
+
 <br/>
 <h3 style="color:red">${emailMissing}</h3>
 
@@ -57,6 +61,7 @@ Click on Add Email to add Email Addresses of future household members
 <p>
 	<button name= "login" onclick = "textareaReplaceLineBreaks();" type = "submit">Create Household</button>
 </p>
+
 </FORM>
 </BODY>
 </HTML>

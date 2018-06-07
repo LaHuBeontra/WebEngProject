@@ -21,7 +21,6 @@ public class JoinHouseholdServlet extends HttpServlet {
      */
     public JoinHouseholdServlet() {
         super();
-        
     }
 
 	/**

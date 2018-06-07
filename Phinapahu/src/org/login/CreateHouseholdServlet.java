@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+
 import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -117,6 +119,7 @@ public class CreateHouseholdServlet extends HttpServlet {
 			}
 			request.setAttribute("emailError", "Please check that all entered email addresses are valid");
 		}
+
 	}
 
 }

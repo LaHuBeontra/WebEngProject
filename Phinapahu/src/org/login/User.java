@@ -8,8 +8,7 @@ public class User {
 	private boolean Admin;
 	
 	private Household Household;
-	
-		
+
 	public String getUserName() {
 		return UserName;
 	}
@@ -42,4 +41,20 @@ public class User {
 		Household = household;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (UserName == null) {
+			if (other.UserName != null)
+				return false;
+		} else if (!UserName.equals(other.UserName))
+			return false;
+		return true;
+	}
 }
