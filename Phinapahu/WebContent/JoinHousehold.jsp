@@ -8,8 +8,8 @@
 </head>
 <body>
 <p>
-<h3 style="color:red">${JoinHouseholdError}</h3>
-Please enter the Password you received
+	<h3 style="color:red">${JoinHouseholdError}</h3>
+	Please enter the Password you received
 </p>
 <form action = "JoinHouseholdServlet" method="post">
 	<p>
