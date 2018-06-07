@@ -41,7 +41,6 @@ public class User {
 		Household = household;
 	}
 	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

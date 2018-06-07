@@ -23,14 +23,13 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -49,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         	User user = loginService.getUserDetails(userName);
         	//add user to session variable
 			request.getSession().setAttribute("user", user);
-			
+	
 			//Redirect to Management.jsp if user is admin
             if (user.isAdmin()) request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
             else request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
