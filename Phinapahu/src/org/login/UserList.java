@@ -5,8 +5,11 @@ import java.util.List;
 
 public class UserList {
 	private static List<User> users = new ArrayList<User>();
+	private static Household household = new Household();
 	
 	static {
+		household.setPassword("test123");
+		
 		User test1 = new User ();
 		User test2 = new User ();
 		test1.setUserName("test1");
@@ -26,6 +29,10 @@ public class UserList {
 			if (thisUser.equals(user)) return thisUser;
 		}
 		return null;
+	}
+	
+	public Household getHousehold() {
+		return household;
 	}
 	
 	public void addUser(User user) {
