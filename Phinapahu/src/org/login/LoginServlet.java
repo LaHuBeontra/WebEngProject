@@ -50,12 +50,16 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("user", user);
 	
 			//Redirect to Management.jsp if user is admin
-            if (user.isAdmin()) request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
-            else request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
+            if (user.isAdmin()) 
+            	request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
+            else 
+            	request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
         }  
         else{  
-            RequestDispatcher rd=request.getRequestDispatcher("/LoginError.jsp");  
-            rd.forward(request, response);  
+        	request.setAttribute("registrationError", "Login was not successful :-[");
+        	RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+        	rd.forward(request, response);
+  
         } 
 	}
 

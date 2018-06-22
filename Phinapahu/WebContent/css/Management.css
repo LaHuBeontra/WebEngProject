@@ -1,10 +1,65 @@
-h1 {
-	background-color: red;
-	color: red;
+
+.top5{
+	margin-top: 3%
+}
+.right5{
+	margin-right: 10px
+}
+.bottom5{
+	margin-bottom: 3%
+}
+.bottom2{
+	margin-bottom: 5px
+}
+.cyan{
+	color: #fff;
+	backgound-color: #17a2b8
+}
+.btn-primary {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #0f6d7b;
+  border-color: #17a2b8;
+}
+.btn-link:hover {
+  color: #0f6d7b;
+  text-decoration: underline;
+  background-color: transparent;
+  border-color: transparent;
+}
+body {
+    background-size: 100%;
+    background-attachment:fixed;
+    position:relative;
+    background-image: url("wood.jpg");
+}
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+  opacity:0.9;
+}
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index:1;
+  opacity:1
+}
+.content{
+	position: relative;
+	padding-top: 150px;
 }
 
-#test {
-	background-color: red;
-	color: red;
-	font-size: 100px;
+.fa{
+	background: transparent
+}
+.fa-cog {
+  color: black;
+  background: transparent;
 }

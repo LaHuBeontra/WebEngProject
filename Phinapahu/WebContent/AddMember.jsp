@@ -4,13 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Add User</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/Management.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+<jsp:include page="Header.jsp"/>
+<div class="container content">
+		<div class="row">
+
+			<div class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4">
 <p>What's the E-Mail of your new Member?</p>
 <form action = "${pageContext.request.contextPath}/AddMemberServlet.java" method = "post">
     <input name ="MemberEmail" type ="text" value="${param.memberEmail}"/>
-    <input type="submit" value="Add Member"/>
+    <input class = "btn btn-primary" type="submit" value="Add Member"/>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
