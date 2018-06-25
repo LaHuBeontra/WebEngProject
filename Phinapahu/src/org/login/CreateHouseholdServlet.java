@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -54,6 +55,7 @@ public class CreateHouseholdServlet extends HttpServlet {
 		Household household = new Household();
 		String householdName = request.getParameter("HouseholdName");
 		household.setHouseholdName(request.getParameter("HouseholdName"));
+
 		household.setPassword(householdPassword);
 		
 		//Check if Household already exists
@@ -93,40 +95,66 @@ public class CreateHouseholdServlet extends HttpServlet {
 						out.println(paramValue);
 						emails[count++] = paramValue;
 
-					}
-				} else {
-					out.println("<ul>");
-					for (int i = 0; i < paramValues.length; i++) {
-						out.println("<li>" + paramValues[i] + "</li>");
-					}
-					out.println("</ul>");
-				}
-				out.print("</td></tr>");
-			}
-		}
-		out.println("</table>");
-		out.println(householdPassword);
-		// out.println(user.getUserName());
-		out.println("</body></html>");
 		
-		//Check if email is entered
-		if (!isEmailEntered) {
-			request.setAttribute("emailMissing", "Please enter recipient's email adresses");
-			RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
-			rd.forward(request, response);
-		} else {
-			if (loginService.areEmailsValid(emails)) {
+			// get parameters
+			Map<String, String[]> map = request.getParameterMap();
+			int parametersCount = map.size();
+			String[] emails = new String[parametersCount - 3];
 
-				loginService.createHousehold(householdName, userName, userPassword, householdPassword);
-				
-				EmailService emailService = new EmailService();
-				emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
-						request.getParameter("invitationText"), householdPassword);
+			Set set = map.entrySet();
+			Iterator it = set.iterator();
+			boolean isEmailEntered = false;
+			int count = 0;
+			String[] paramValues = null;
+			while (it.hasNext()) {
+				Map.Entry<String, String[]> entry = (Entry<String, String[]>) it.next();
+				String paramName = entry.getKey();
+
+				if (paramName.startsWith("Email")) {
+					isEmailEntered = true;
+					if (entry.getValue() != null) {
+						paramValues = entry.getValue();
+					}
+
+					if (paramValues.length == 1) {
+						String paramValue = paramValues[0];
+						if (paramValue.length() == 0) {
+							request.setAttribute("emailMissing", "not all emails were entered");
+							RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
+							rd.forward(request, response);}
+						else {
+							emails[count++] = paramValue;
+
+						}
+					}
+
+				}
 			}
-			request.setAttribute("emailError", "Please check that all entered email addresses are valid");
-		}
+
+			
+			// check if email is entered
+			if (!isEmailEntered) {
+				request.setAttribute("emailMissing", "Please enter recipient's email adresses");
+				RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
+				rd.forward(request, response);
+			} else {
+				boolean valid = loginService.areEmailsValid(emails);
+				if (valid) {
+					loginService.createHousehold(householdName, userName, userPassword, householdPassword);
+					EmailService emailService = new EmailService();
+					emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
+						request.getParameter("invitationText"), password);
+					request.getSession().setAttribute("user", user);
+					request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
+					
+				}else {
+					request.setAttribute("emailMissing", "Please check that all entered email addresses are valid");
+					RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
+					rd.forward(request, response);
+				}
+			}
+
 		
-		}
 	}
 
 }
