@@ -8,7 +8,10 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 
 <SCRIPT language="javascript">
 	var counter = 0;
@@ -70,6 +73,7 @@
 					<INPUT type="button" class = "btn btn-secondary" value="Add Email"
 						onclick="add(document.forms[0].text)" /> <br> <span
 						id="fooBar">&nbsp;</span>
+					
 					<br/>
 					<br/>
 					
