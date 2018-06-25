@@ -1,22 +1,18 @@
 package org.login;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
-
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import javax.servlet.annotation.WebServlet;
 
 /**
  * Servlet implementation class CreateHouseholdServlet
@@ -44,23 +40,30 @@ public class CreateHouseholdServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// generate random password
+		String userName     = (String) request.getSession().getAttribute("userName");
+		String userPassword = (String) request.getSession().getAttribute("userPassword");
+		
+		//Generate random password
 		LoginService loginService = new LoginService();
-		String password = loginService.generatePassword();
-
-		// TODO store household to database
+		String householdPassword  = loginService.generatePassword();
+		
+		//Store Household to FileSystem
 		Household household = new Household();
+		String householdName = request.getParameter("HouseholdName");
 		household.setHouseholdName(request.getParameter("HouseholdName"));
-		household.setPassword(password);
-
-		// TODO store user to database
-		User user = (User) request.getSession().getAttribute("user");
-		user.setAdmin(true);
-		user.setHouseholdName(household);
-
-		// get parameters
+		household.setPassword(householdPassword);
+		
+		//Check if Household already exists
+		if (loginService.listContainsHousehold(request.getParameter("HouseholdName"))) {
+			request.setAttribute("createHouseholdError", "Household already exists, please enter a different name!");
+			RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
+			rd.forward(request, response);
+		} else {
+			
+		//Get parameters
 		Map<String, String[]> map = request.getParameterMap();
 		int parametersCount = map.size();
 		String[] emails = new String[parametersCount - 3];
@@ -102,10 +105,11 @@ public class CreateHouseholdServlet extends HttpServlet {
 			}
 		}
 		out.println("</table>");
-		out.println(password);
+		out.println(householdPassword);
 		// out.println(user.getUserName());
 		out.println("</body></html>");
-		// check if email is entered
+		
+		//Check if email is entered
 		if (!isEmailEntered) {
 			request.setAttribute("emailMissing", "Please enter recipient's email adresses");
 			RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
@@ -113,13 +117,16 @@ public class CreateHouseholdServlet extends HttpServlet {
 		} else {
 			if (loginService.areEmailsValid(emails)) {
 
+				loginService.createHousehold(householdName, userName, userPassword, householdPassword);
+				
 				EmailService emailService = new EmailService();
 				emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
-						request.getParameter("invitationText"), password);
+						request.getParameter("invitationText"), householdPassword);
 			}
 			request.setAttribute("emailError", "Please check that all entered email addresses are valid");
 		}
-
+		
+		}
 	}
 
 }

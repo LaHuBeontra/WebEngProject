@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Management Error</title>
 </head>
 <body>
     <h3>You can't use actions on yourself! :(</h3>

@@ -37,6 +37,7 @@ function textareaReplaceLineBreaks(){
 </SCRIPT>
 </HEAD>
 <BODY>
+<h3 style="color:red">${createHouseholdError}</h3>
 <FORM action = "CreateHouseholdServlet" method = "post" accept-charset=utf-8>
 Please enter a name for the Household<br>
 	<p>

@@ -1,14 +1,16 @@
 package org.management.actions;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.User;
-import org.login.UserList;
+import org.login.EmailService;
+import org.login.LoginService;
 
 /**
  * Servlet implementation class AddMemberServlet
@@ -16,34 +18,42 @@ import org.login.UserList;
 @WebServlet(urlPatterns = "/AddMemberServlet.java")
 public class AddMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserList userList = new UserList();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddMemberServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User();
-	    user.setUserName(request.getParameter("toggleUser").toString());
-	    User listUser = userList.getUser(user);
+		String householdName = (String) request.getSession().getAttribute("householdName");
+	    String email         = request.getParameter("MemberEmail");
+	    String[] emails      = new String[1];
+	    emails[0]            = email;
 	    
-	    //Check if a user is trying to change his own status
-	    User thisUser = (User)request.getSession().getAttribute("user");
-	    if (!user.equals(thisUser)) {
-	    	//Change Status of user
-	        if (listUser.isAdmin()) listUser.setAdmin(false);
-	        else listUser.setAdmin(true);
-	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
-	    } else {
-	    	request.getRequestDispatcher("/ManagementActionError.jsp").forward(request, response);
-	    }
+	    LoginService loginService = new LoginService();
+	    
+	    String password = loginService.getHouseholdPassword(householdName);
+	    
+	    if (email.isEmpty()) {
+			request.setAttribute("emailError", "Please enter recipient's email adress!");
+			RequestDispatcher rd = request.getRequestDispatcher("AddMember.jsp");
+			rd.forward(request, response);
+		} else {
+			if (loginService.areEmailsValid(emails)) {
+				EmailService emailService = new EmailService();
+				emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
+						request.getParameter("invitationText"), password);
+				
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("/SuccessfullMail.jsp").forward(request, response);
+			}
+			request.setAttribute("emailError", "Please check that all entered email addresses are valid");
+		}
 	}
 
 }
