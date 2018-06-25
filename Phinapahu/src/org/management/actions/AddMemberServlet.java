@@ -8,11 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import org.login.EmailService;
 import org.login.LoginService;
-import org.login.UserList;
 
 /**
  * Servlet implementation class AddMemberServlet
@@ -20,29 +18,29 @@ import org.login.UserList;
 @WebServlet(urlPatterns = "/AddMemberServlet.java")
 public class AddMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserList userList = new UserList();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddMemberServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	   
-		LoginService loginService = new LoginService();
-	    String password = userList.getHousehold().getPassword();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String householdName = (String) request.getSession().getAttribute("householdName");
+	    String email         = request.getParameter("MemberEmail");
+	    String[] emails      = new String[1];
+	    emails[0]            = email;
 	    
-	    String email = request.getParameter("MemberEmail");
-	    String[] emails = new String[1];
-	    emails[0] = email;
+	    LoginService loginService = new LoginService();
+	    
+	    String password = loginService.getHouseholdPassword(householdName);
 	    
 	    if (email.isEmpty()) {
-			request.setAttribute("emailMissing", "Please enter recipient's email adress!");
+			request.setAttribute("emailError", "Please enter recipient's email adress!");
 			RequestDispatcher rd = request.getRequestDispatcher("AddMember.jsp");
 			rd.forward(request, response);
 		} else {

@@ -8,11 +8,8 @@
 <title>Register Success</title>
 </head>
 <body>
-<%
-	User user = (User)request.getSession().getAttribute("user");
-%>
-<p> Welcome <%=user.getUserName() %> 
-Your registration is complete!
-</p>
+<h1>Welcome to the ${householdName} household, ${userName}!</h1>
+<h3>Your registration is complete!</h3>
+<a href = "Login.jsp">Return to Login page!</a>
 </body>
 </html>

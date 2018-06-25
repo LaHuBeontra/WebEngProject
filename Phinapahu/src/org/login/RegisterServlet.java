@@ -34,24 +34,23 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName=request.getParameter("UserName"); 
-		String email = request.getParameter("Email");
-        String password=request.getParameter("Password");
+		String userName  = request.getParameter("UserName"); 
+		String email     = request.getParameter("Email");
+        String password  = request.getParameter("Password");
         String household = request.getParameter("Household");
-          
+        
         LoginService loginService = new LoginService();  
           
-        String error=loginService.checkData(userName, password, email, household);
-        if(error != null && !error.isEmpty()) {
+        String error = loginService.checkData(userName, password, email, household);
+        
+        if (error != null && !error.isEmpty()) {
+        	//User already exists/is invalid
         	request.setAttribute("registrationError", error);
         	RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
         	rd.forward(request, response);
-        }else {
-        	User newUser = new User();
-        	newUser.setUserName(userName);
-        	newUser.setEmail(email);
-        	newUser.setPassword(password);
-        	request.getSession().setAttribute("user", newUser);
+        } else {
+        	request.getSession().setAttribute("userName", userName);
+        	request.getSession().setAttribute("userPassword", password);
         	if(household.equals("Create")) {
         		RequestDispatcher rd=request.getRequestDispatcher("CreateHousehold.jsp");  
                 rd.forward(request, response);

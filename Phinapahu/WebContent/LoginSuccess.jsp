@@ -9,9 +9,6 @@
 </head>
 <body>
 <h3> Login successful!</h3>
-<%
-	User user = (User)request.getSession().getAttribute("user");
-%>
-Hello <%=user.getUserName() %> 
+Hello ${userName}!
 </body>
 </html>

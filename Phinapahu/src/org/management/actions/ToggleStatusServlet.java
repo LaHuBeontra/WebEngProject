@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.User;
-import org.login.UserList;
+import org.login.LoginService;
 
 /**
  * Servlet implementation class ToggleStatusServlet
@@ -17,30 +16,28 @@ import org.login.UserList;
 @WebServlet(urlPatterns = "/ToggleStatusServlet.java")
 public class ToggleStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private UserList userList = new UserList();
     
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ToggleStatusServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User();
-	    user.setUserName(request.getParameter("toggleUser").toString());
-	    User listUser = userList.getUser(user);
+	    String userName        = request.getParameter("toggleUser");
+		String currentUserName = (String) request.getSession().getAttribute("userName");
 	    
+		LoginService loginService = new LoginService();
+		
 	    //Check if a user is trying to change his own status
-	    User thisUser = (User)request.getSession().getAttribute("user");
-	    if (!user.equals(thisUser)) {
+	    if (!userName.equals(currentUserName)) {
 	    	//Change Status of user
-	        if (listUser.isAdmin()) listUser.setAdmin(false);
-	        else listUser.setAdmin(true);
+	    	String status = loginService.getStatusFromUser(userName);
+	        loginService.changeStatus(userName, status);
 	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
 	    } else {
 	    	request.getRequestDispatcher("/ManagementActionError.jsp").forward(request, response);

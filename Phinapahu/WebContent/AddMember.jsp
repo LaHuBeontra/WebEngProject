@@ -16,7 +16,7 @@ function textareaReplaceLineBreaks(){
 <body>
 <p>What's the E-Mail of your new Member?</p>
 
-<h3 style="color:red">${emailMissing}</h3>
+<h3 style="color:red">${emailError}</h3>
 
 <form action="${pageContext.request.contextPath}/AddMemberServlet.java" method="post">
     <p>
