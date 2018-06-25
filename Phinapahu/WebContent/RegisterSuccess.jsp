@@ -12,23 +12,10 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<jsp:include page="Header.jsp" />
 
-	<div class="container content">
-		<div class="row">
+<h1>Welcome to the ${householdName} household, ${userName}!</h1>
+<h3>Your registration is complete!</h3>
+<a href = "Login.jsp">Return to Login page!</a>
 
-			<div
-				class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 margin">
-<%
-	User user = (User)request.getSession().getAttribute("user");
-%>
-
-<h1> Welcome <%=user.getUserName() %>!</h1>
-
-<h4>Your registration is complete!</h4>
-
-</div>
-</div>
-</div>
 </body>
 </html>

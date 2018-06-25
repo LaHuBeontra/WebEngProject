@@ -52,10 +52,9 @@
 			<div class="jumbotron col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 margin">
 				<h1 class="text-center">Create Household</h1>
 				<br>
-
+        <h3 style="color:red">${createHouseholdError}</h3>
 				<FORM action="CreateHouseholdServlet" method="post"
 					accept-charset=utf-8>
-
 
 					<div class="form-group">
 

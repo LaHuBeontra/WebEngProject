@@ -34,31 +34,25 @@ public class JoinHouseholdServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String HouseholdPassword=request.getParameter("HouseholdPassword");
-		User user = (User)request.getSession().getAttribute("user");
-		//check if there is a household with this password
+		String householdPassword  = request.getParameter("HouseholdPassword");
+		String userName           = (String) request.getSession().getAttribute("userName");
+		String userPassword       = (String) request.getSession().getAttribute("userPassword");
 		LoginService loginService = new LoginService();
-		boolean householdExists = loginService.checkHouseholdExists(HouseholdPassword);		
-		 
-		if(householdExists) {
-			//set household of this user
-			user.setHouseholdName(loginService.getHouseholdDetail(HouseholdPassword));
-			//set user.admin to false
-			user.setAdmin(false);
-			//TODO store user in database
+		
+		//Check if there is a household with this password
+		if (loginService.passwordFitsHousehold(householdPassword)) {
 			
-			request.getSession().setAttribute("user", user);
+			loginService.joinHousehold(userName, userPassword, householdPassword);
+		    
+		    request.getSession().setAttribute("userName", userName);
+		    request.getSession().setAttribute("householdName", loginService.getUsersHouseholdName(userName));
 			RequestDispatcher rd = request.getRequestDispatcher("RegisterSuccess.jsp");
 			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("JoinHousehold.jsp"); 
-			request.setAttribute("JoinHouseholdError", "Please check that you entered the correct password");
+			
+		} else {
+			request.setAttribute("JoinHouseholdError", "This household does not exist, please check your password again!");
+			RequestDispatcher rd = request.getRequestDispatcher("JoinHousehold.jsp");
             rd.forward(request, response);
 		}
-			
-		
-		
-		
 	}
-
 }
