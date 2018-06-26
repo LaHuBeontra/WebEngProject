@@ -39,7 +39,8 @@ public class DeleteMemberServlet extends HttpServlet {
 	        loginService.deleteUser(userName);
 	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
 	    } else {
-	    	request.getRequestDispatcher("/ManagementActionError.jsp").forward(request, response);
+	    	request.setAttribute("managementError", "You can't delete yourself!");
+	    	request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
 	    }
 	}
 

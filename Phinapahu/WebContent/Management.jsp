@@ -25,6 +25,8 @@
 				<h1>Hi ${userName}, this is your household ${householdName}!</h1>
 				<p id="test">How are you doing?</p>
 				
+				<h3 class ="error">${managementError}</h3>
+				
 				<div class="table-striped">
 					<table class = "table">
 						<thead>
@@ -99,6 +101,9 @@
 					<i class ="fa fa-plus"></i> Add Member
 					</button>
 				</form>
+				<a href="#" class ="btn btn-primary" role="button" style="margin-top: 1%; font-size: 170%;">
+					<i class="fas fa-utensils" style="margin-right: 2%"></i> Go To Meals!
+				</a>
 			</div>
 		</div>
 	</div>

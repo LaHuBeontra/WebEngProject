@@ -29,7 +29,7 @@ function textareaReplaceLineBreaks(){
 
 <h3 style="color:red">${emailError}</h3>
 
-<form action="${pageContext.request.contextPath}/AddMemberServlet.java" method="post">
+<form action="AddMemberServlet.java" method="post">
     <p>
         <input name ="MemberEmail" type ="text" value="${param.MemberEmail}"/>
     </p>
