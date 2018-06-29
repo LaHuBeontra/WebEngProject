@@ -39,10 +39,10 @@ public class EssenErstellen extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		log("Post geschafft");
-		log(request.getParameter("EssenDate")+"   "+ request.getParameter("Essen"));
+		//log(request.getParameter("EssenDate")+"   "+ request.getParameter("Essen"));
 		if(request.getParameter("EssenDate") != null && request.getParameter("Essen")!= null) {
 			EssenBean essen = new EssenBean(request.getParameter("EssenDate"), request.getParameter("Essen"));
-			essen.save();
+			essen.saveThis();
 		}
 		
 		 RequestDispatcher rd=request.getRequestDispatcher("Essen.jsp");  

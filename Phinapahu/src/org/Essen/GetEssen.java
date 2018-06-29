@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.EssenBean;
-
 /**
  * Servlet implementation class GetEssen
  */
@@ -50,16 +48,29 @@ public class GetEssen extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		Set<EssenBean> getEssenSet = new TreeSet<EssenBean>();
-		File dates = new File("dates.txt");
-		if (dates.exists()) {
-			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
-				while (br.ready())
-					getEssenSet.add((EssenBean.parse(br.readLine())) );
-			} catch (IOException e) {
-				System.err.println("Fehler beim Lesen: " + e.getMessage());
+		File essen = new File("Essen.txt");
+		if (essen.exists()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
+				while (br.ready()) {
+					log("reader ist am lesen");
+					// log("essen wird versucht hinzuzufügen");
+					try {
+						EssenBean test = new EssenBean(br.readLine());
+						log(test.getDate() + "-" + test.getEssen() + "-" + test.getVotes());
+						 log("Wenn da die essensdaten standen wird es jetzt hinzugefügt");
+						 getEssenSet.add(test);
+						log("essen wurde zur liste hinzugefügt");
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
+					}
+				}
+				log("reader ist fertig");
+			} catch (Exception ee) {
+				System.err.println(ee.getMessage());
 			}
-			
+
 		}
+
 		log("size of EssenList: " + getEssenSet.size());
 		request.setAttribute("getEssenSet", getEssenSet);
 

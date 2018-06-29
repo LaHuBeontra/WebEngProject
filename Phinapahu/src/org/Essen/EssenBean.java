@@ -3,28 +3,39 @@ package org.Essen;
 import java.io.*;
 import java.util.*;
 
-public class EssenBean {
+public class EssenBean implements Comparable<EssenBean> {
 	String date;
 	String essen;
 	int votes;
+	
+	 public int compareTo(EssenBean o2) {
+		 String s1 = this.date+ this.essen+this.votes;
+		 String s2 = o2.date+o2.essen+o2.votes;
+		return s1.compareTo(s2);	        
+	    }
 
-	static public EssenBean parse(String string) {
-		int datel = string.indexOf(";");
-		System.out.println(datel);
-		String date = string.substring(0, datel);		
-		System.out.println(date);
-		string = string.substring(datel+1);
-		System.out.println(string);
-		int essenl =  string.indexOf(";");
-		System.out.println(essenl);
-		String essenString = string.substring(0,essenl );
-		string = string.substring(essenl);
-		int votes =Integer.parseInt(string.substring(1));
-		try{EssenBean essenlsg = new EssenBean(date,essenString);
-		essenlsg.setVotes(votes);
-		return essenlsg;
-		}
-		catch(Exception e){
+	public static EssenBean parse(String string) {
+		//System.out.println(string + " Wird versucht zu einem essen umzzuwandeln");
+		try {
+			int datel = string.indexOf(";");
+			String date = string.substring(0, datel);
+			string = string.substring(datel + 1);
+			int essenl = string.indexOf(";");
+			String essenString = string.substring(0, essenl);
+			string = string.substring(essenl);
+			int votes = Integer.parseInt(string.substring(1));
+			//System.out.println("Zum erstellen des essens wird verendet: " + date + " & " + essenString + " & " + votes);
+			if (date != null && essenString != null) {
+				EssenBean essenlsg = new EssenBean(date, essenString);
+				essenlsg.setVotes(votes);
+				System.out.println(essenlsg.date +"//"+ essenlsg.essen+"//"+essenlsg.votes);
+				return essenlsg;
+			}
+			else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.err.println( e.getMessage());
 			return null;
 		}
 	}
@@ -46,21 +57,41 @@ public class EssenBean {
 	}
 
 	public EssenBean(String date, String essen) {
+		//System.out.println("Neues essen wird ertellt mit den Daten : " + essen + " am " + date);
 		if (checkDate(date)) {
 			this.date = date;
 			this.essen = essen;
 			this.votes = 0;
-			System.out.println("test zum anzeigen");
-
 		} else {
-
+			System.out.println("datum nicht gefunden");
+			System.exit(0);
 		}
+		//System.out.println("Essen erfolgreich erstellt");
+	}
+	
+	public EssenBean(String string) {
+		int datel = string.indexOf(";");
+		String date = string.substring(0, datel);
+		string = string.substring(datel + 1);
+		int essenl = string.indexOf(";");
+		String essenString = string.substring(0, essenl);
+		string = string.substring(essenl);
+		int votes = Integer.parseInt(string.substring(1));		
+		if (checkDate(date)) {
+			this.date = date;
+			this.essen = essenString;
+			this.votes = votes;
+		} else {
+			System.out.println("datum nicht gefunden");
+			System.exit(0);
+		}
+		//System.out.println("Essen erfolgreich erstellt");
 	}
 
 	public int getVotes() {
 		return this.votes;
 	}
-	
+
 	public void setVotes(int votes) {
 		this.votes = votes;
 	}
@@ -68,28 +99,34 @@ public class EssenBean {
 	public void vote() {
 		this.delete();
 		this.votes++;
-		this.save();
+		this.saveThis();
 	}
 
 	public void delete() {
-		Set<EssenBean> dateSet = new TreeSet<EssenBean>();
-		File dates = new File("dates.txt");
-		if (dates.exists()) {
-			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
+		Set<String> essenStringSet = new TreeSet<String>();
+		File essen = new File("Essen.txt");
+		if (essen.exists()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
 				while (br.ready())
-					dateSet.add(this);
+					essenStringSet.add(br.readLine());
 			} catch (IOException e) {
 				System.err.println("Fehler beim Lesen: " + e.getMessage());
 			}
 		}
-		dateSet.remove(this);
+		essenStringSet.remove(this.date+";"+this.essen+";"+this.votes);
+		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, false))) {
+			for (String s : essenStringSet)
+				pw.println(s);
+		} catch (IOException e) {
+			System.err.println("Fehler beim Schreiben: " + e.getMessage());
+		}
 	}
 
-	public void save() {
+	public void saveThis() {
+		//System.out.println("save this erricht");
 		File essen = new File("Essen.txt");
-
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, true))) {
-			pw.println(this);
+			pw.println(this.date+";"+this.essen+";"+this.votes);
 		} catch (IOException e) {
 			System.err.println("Fehler beim Schreiben: " + e.getMessage());
 		}

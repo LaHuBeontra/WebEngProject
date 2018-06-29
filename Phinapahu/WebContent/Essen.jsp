@@ -1,5 +1,4 @@
 <%@page import="org.Essen.EssenBean"%>
-<%@page import="org.EssenBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -59,7 +58,7 @@
   
 	<form action="GetEssen" method="post">
 	<button name="getEssen" type="submit">Essen Anzeigen</button>
-	<% //List<String> dateList =new ArrayList<String>();
+	<% 
 	Set<EssenBean> essenSet = new TreeSet<EssenBean>();
 	if((Set<EssenBean>) request.getAttribute("getEssenSet") != null){
 		essenSet = ((Set<EssenBean>) request.getAttribute("getEssenSet")) ;
@@ -68,7 +67,7 @@
 	 <P>
 	 <%
 	 for(EssenBean s :essenSet){
-		out.println(s.getEssen() + " am " + s.getDate()); 
+		out.println(s.getEssen() + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 %>
 		 <P>
 		 <%
