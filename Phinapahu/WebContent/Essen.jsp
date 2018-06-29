@@ -62,26 +62,23 @@
 	Set<EssenBean> essenSet = new TreeSet<EssenBean>();
 	if((Set<EssenBean>) request.getAttribute("getEssenSet") != null){
 		essenSet = ((Set<EssenBean>) request.getAttribute("getEssenSet")) ;
-	// out.print("Array nicht leer");
 	 %>
+	  </form>
 	 <P>
 	 <%
+	 
 	 for(EssenBean s :essenSet){
 		out.println(s.getEssen() + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
-		 %>		
-		 <button name="voteEssen" onclick=<%s.vote((String)request.getSession().getAttribute("userName")); %> >Für das essen abstimmen</button>
 		 //Voted noch für alle essen muss noch angepasst werden
+		 %>		
+		 <button name="voteEssen" id="vote" onclick=<%s.vote((String)request.getSession().getAttribute("userName")); %> >Für das essen abstimmen</button>		
 		  <P>
 		 <%
 	 }
-	// out.print(" das war das array");
-	}
-	else{
-		//out.print("Array leer");
 	}
 		
 	%>
-  </form>
+ 
   
  
 		 

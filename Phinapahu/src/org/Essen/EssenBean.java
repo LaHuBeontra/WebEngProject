@@ -3,6 +3,8 @@ package org.Essen;
 import java.io.*;
 import java.util.*;
 
+import javax.sound.midi.ShortMessage;
+
 public class EssenBean implements Comparable<EssenBean> {
 	String date;
 	String essen;
@@ -97,17 +99,40 @@ public class EssenBean implements Comparable<EssenBean> {
 		this.votes = votes;
 	}
 
-	public void vote(String user) {
-		this.delete();
+	public void vote(String user) {			
 		if (userVote(this.date, user)) {
+			this.delete();
 			this.votes++;
+			this.saveThis();
 		}
-		this.saveThis();
+		else {
+			System.out.println("Benutzer hat schon abgestimmt");
+		}
+		
 	}
 
 	public boolean userVote(String date, String user) {
-		//TBD user und datum in datein eintragen wenn noch ncith vorhanden valls doch nicht abstimmen lassen
-		return true;
+		Set<String> voteSet = new TreeSet<String>();
+		File votes = new File("Votes.txt");
+		if (votes.exists()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(votes))) {
+				while (br.ready())
+					voteSet.add(br.readLine());
+			} catch (IOException e) {
+				System.err.println("Fehler beim Lesen: " + e.getMessage());
+			}
+		}
+		if (voteSet.contains(user + ";" + date)) {
+			return false;
+		} else {
+			try (PrintWriter pw = new PrintWriter(new FileWriter(votes, true))) {
+				pw.println(user + ";" + date);
+			} catch (IOException e) {
+				System.err.println("Fehler beim Schreiben: " + e.getMessage());
+			}
+			return true;
+		}
+
 	}
 
 	public void delete() {
