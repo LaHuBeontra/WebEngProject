@@ -7,15 +7,15 @@ public class EssenBean implements Comparable<EssenBean> {
 	String date;
 	String essen;
 	int votes;
-	
-	 public int compareTo(EssenBean o2) {
-		 String s1 = this.date+ this.essen+this.votes;
-		 String s2 = o2.date+o2.essen+o2.votes;
-		return s1.compareTo(s2);	        
-	    }
+
+	public int compareTo(EssenBean o2) {
+		String s1 = this.date + this.essen + this.votes;
+		String s2 = o2.date + o2.essen + o2.votes;
+		return s1.compareTo(s2);
+	}
 
 	public static EssenBean parse(String string) {
-		//System.out.println(string + " Wird versucht zu einem essen umzzuwandeln");
+		// System.out.println(string + " Wird versucht zu einem essen umzzuwandeln");
 		try {
 			int datel = string.indexOf(";");
 			String date = string.substring(0, datel);
@@ -24,18 +24,18 @@ public class EssenBean implements Comparable<EssenBean> {
 			String essenString = string.substring(0, essenl);
 			string = string.substring(essenl);
 			int votes = Integer.parseInt(string.substring(1));
-			//System.out.println("Zum erstellen des essens wird verendet: " + date + " & " + essenString + " & " + votes);
+			// System.out.println("Zum erstellen des essens wird verendet: " + date + " & "
+			// + essenString + " & " + votes);
 			if (date != null && essenString != null) {
 				EssenBean essenlsg = new EssenBean(date, essenString);
 				essenlsg.setVotes(votes);
-				System.out.println(essenlsg.date +"//"+ essenlsg.essen+"//"+essenlsg.votes);
+				System.out.println(essenlsg.date + "//" + essenlsg.essen + "//" + essenlsg.votes);
 				return essenlsg;
-			}
-			else {
+			} else {
 				return null;
 			}
 		} catch (Exception e) {
-			System.err.println( e.getMessage());
+			System.err.println(e.getMessage());
 			return null;
 		}
 	}
@@ -57,7 +57,8 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public EssenBean(String date, String essen) {
-		//System.out.println("Neues essen wird ertellt mit den Daten : " + essen + " am " + date);
+		// System.out.println("Neues essen wird ertellt mit den Daten : " + essen + " am
+		// " + date);
 		if (checkDate(date)) {
 			this.date = date;
 			this.essen = essen;
@@ -66,9 +67,9 @@ public class EssenBean implements Comparable<EssenBean> {
 			System.out.println("datum nicht gefunden");
 			System.exit(0);
 		}
-		//System.out.println("Essen erfolgreich erstellt");
+		// System.out.println("Essen erfolgreich erstellt");
 	}
-	
+
 	public EssenBean(String string) {
 		int datel = string.indexOf(";");
 		String date = string.substring(0, datel);
@@ -76,7 +77,7 @@ public class EssenBean implements Comparable<EssenBean> {
 		int essenl = string.indexOf(";");
 		String essenString = string.substring(0, essenl);
 		string = string.substring(essenl);
-		int votes = Integer.parseInt(string.substring(1));		
+		int votes = Integer.parseInt(string.substring(1));
 		if (checkDate(date)) {
 			this.date = date;
 			this.essen = essenString;
@@ -85,7 +86,7 @@ public class EssenBean implements Comparable<EssenBean> {
 			System.out.println("datum nicht gefunden");
 			System.exit(0);
 		}
-		//System.out.println("Essen erfolgreich erstellt");
+		// System.out.println("Essen erfolgreich erstellt");
 	}
 
 	public int getVotes() {
@@ -96,10 +97,17 @@ public class EssenBean implements Comparable<EssenBean> {
 		this.votes = votes;
 	}
 
-	public void vote() {
+	public void vote(String user) {
 		this.delete();
-		this.votes++;
+		if (userVote(this.date, user)) {
+			this.votes++;
+		}
 		this.saveThis();
+	}
+
+	public boolean userVote(String date, String user) {
+		//TBD user und datum in datein eintragen wenn noch ncith vorhanden valls doch nicht abstimmen lassen
+		return true;
 	}
 
 	public void delete() {
@@ -113,7 +121,7 @@ public class EssenBean implements Comparable<EssenBean> {
 				System.err.println("Fehler beim Lesen: " + e.getMessage());
 			}
 		}
-		essenStringSet.remove(this.date+";"+this.essen+";"+this.votes);
+		essenStringSet.remove(this.date + ";" + this.essen + ";" + this.votes);
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, false))) {
 			for (String s : essenStringSet)
 				pw.println(s);
@@ -123,10 +131,9 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public void saveThis() {
-		//System.out.println("save this erricht");
 		File essen = new File("Essen.txt");
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, true))) {
-			pw.println(this.date+";"+this.essen+";"+this.votes);
+			pw.println(this.date + ";" + this.essen + ";" + this.votes);
 		} catch (IOException e) {
 			System.err.println("Fehler beim Schreiben: " + e.getMessage());
 		}

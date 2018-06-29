@@ -70,7 +70,6 @@
 		out.println(s.getEssen() + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 %>		
 		 <button name="voteEssen" onclick=<%s.vote((String)request.getSession().getAttribute("userName")); %> >Für das essen abstimmen</button>
-		 //Voted noch für alle essen muss noch angepasst werden
 		  <P>
 		 <%
 	 }
@@ -82,9 +81,6 @@
 		
 	%>
   </form>
-  
- 
-		 
 
 </body>
 </html>
