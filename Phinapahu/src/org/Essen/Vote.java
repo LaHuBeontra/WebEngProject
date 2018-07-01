@@ -1,11 +1,7 @@
 package org.Essen;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,33 +10,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Date
+ * Servlet implementation class Vote
  */
-@WebServlet("/Date")
-public class Date extends HttpServlet {
+@WebServlet("/Vote")
+public class Vote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-
-	public Date() {
+	public Vote() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @return
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		log("datum request");
-
 	}
 
 	/**
@@ -49,32 +40,21 @@ public class Date extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String dateString = request.getParameter("Date");
-		if (dateString.length() > 0) {
-
-			SimpleDateFormat sdfToDate = new SimpleDateFormat("dd.MM.yyyy");
-			try {
-				sdfToDate.parse(dateString);
-				log("Datum: " + dateString + " erfolgreich");
-
-				File dates = new File("dates.txt");
-
-				try (PrintWriter pw = new PrintWriter(new FileWriter(dates, true))) {
-					pw.println(dateString);
-				} catch (IOException e) {
-					System.err.println("Fehler beim Schreiben: " + e.getMessage());
-				}
-
-			} catch (ParseException ex2) {
-				log(dateString+": " +"Fehler bei der Datumsumwandlung");
-			}
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		String vote = request.getParameter("vote");
+		log("vote: " + vote);
+		try {
+			EssenBean essen = new EssenBean(vote);
+			essen.vote((String)request.getParameter("userName"));
+			//essen.vote("testUser");
+		} catch (Exception e) {
+			System.err.println( e.getMessage());
 		}
+
+		// Aus dem essen und dem datum das essen finden und voten
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
-
-		// dateList.add(date);
-
 	}
 
 }

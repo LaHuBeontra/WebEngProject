@@ -73,20 +73,25 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public EssenBean(String string) {
-		int datel = string.indexOf(";");
-		String date = string.substring(0, datel);
-		string = string.substring(datel + 1);
-		int essenl = string.indexOf(";");
-		String essenString = string.substring(0, essenl);
-		string = string.substring(essenl);
-		int votes = Integer.parseInt(string.substring(1));
-		if (checkDate(date)) {
-			this.date = date;
-			this.essen = essenString;
-			this.votes = votes;
-		} else {
-			System.out.println("datum nicht gefunden");
-			System.exit(0);
+		//System.out.println(string);
+		try {
+			int datel = string.indexOf(";");
+			String date = string.substring(0, datel);
+			string = string.substring(datel + 1);
+			int essenl = string.indexOf(";");
+			String essenString = string.substring(0, essenl);
+			string = string.substring(essenl);
+			int votes = Integer.parseInt(string.substring(1));
+			if (checkDate(date)) {
+				this.date = date;
+				this.essen = essenString;
+				this.votes = votes;
+			} else {
+				System.out.println("datum nicht gefunden");
+				System.exit(0);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 		// System.out.println("Essen erfolgreich erstellt");
 	}
@@ -99,16 +104,16 @@ public class EssenBean implements Comparable<EssenBean> {
 		this.votes = votes;
 	}
 
-	public void vote(String user) {			
+	public void vote(String user) {
+		// System.out.println(this.date+this.essen+this.votes+user);
 		if (userVote(this.date, user)) {
 			this.delete();
 			this.votes++;
 			this.saveThis();
-		}
-		else {
+		} else {
 			System.out.println("Benutzer hat schon abgestimmt");
 		}
-		
+
 	}
 
 	public boolean userVote(String date, String user) {
@@ -123,7 +128,8 @@ public class EssenBean implements Comparable<EssenBean> {
 			}
 		}
 		if (voteSet.contains(user + ";" + date)) {
-			return false;
+			 System.out.println("der benutzer hat bereits abgestimmt");
+			 return false;
 		} else {
 			try (PrintWriter pw = new PrintWriter(new FileWriter(votes, true))) {
 				pw.println(user + ";" + date);

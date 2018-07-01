@@ -37,7 +37,21 @@ public class GetDates extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Set<String> getDateSet = new TreeSet<String>();
+		File dates = new File("dates.txt");
+		if (dates.exists()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
+				while (br.ready())
+					getDateSet.add(br.readLine());
+			} catch (IOException e) {
+				System.err.println("Fehler beim Lesen: " + e.getMessage());
+			}
+		}
+		log("size of DateList: " + getDateSet.size());
+		request.setAttribute("getDateSet", getDateSet);
+
+		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
+		rd.forward(request, response);
 		
 	}
 
@@ -51,7 +65,7 @@ public class GetDates extends HttpServlet {
 		doGet(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		// List<String> getDateList = new ArrayList<String>();
-		Set<String> getDateSet = new TreeSet<String>();
+	/*	Set<String> getDateSet = new TreeSet<String>();
 		File dates = new File("dates.txt");
 		if (dates.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
@@ -63,6 +77,7 @@ public class GetDates extends HttpServlet {
 		}
 		log("size of DateList: " + getDateSet.size());
 		request.setAttribute("getDateSet", getDateSet);
+		*/
 
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);

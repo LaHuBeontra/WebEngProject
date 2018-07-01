@@ -30,7 +30,7 @@
 	<p>
 	<h3>Daten</h3>
 
-	<form action="GetDates" method="post">
+	<form action="GetDates" method="get">
 	<button name="getDates" type="submit">Daten Anzeigen</button>
 	<% //List<String> dateList =new ArrayList<String>();
 	Set<String> dateSet = new TreeSet<String>();
@@ -56,7 +56,7 @@
   </form>
   <p>
   
-	<form action="GetEssen" method="post">
+	<form action="GetEssen" method="get">
 	<button name="getEssen" type="submit">Essen Anzeigen</button>
 	<% 
 	Set<EssenBean> essenSet = new TreeSet<EssenBean>();
@@ -65,23 +65,21 @@
 	 %>
 	  </form>
 	 <P>
-	 <%
 	 
+	  <form action="Vote" method="post">
+	 <%
 	 for(EssenBean s :essenSet){
 		out.println(s.getEssen() + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 //Voted noch für alle essen muss noch angepasst werden
+		 //log(s.getDate()+";" + s.getEssen()+";"+s.getVotes());
 		 %>		
-		 <button name="voteEssen" id="vote" onclick=<%s.vote((String)request.getSession().getAttribute("userName")); %> >Für das essen abstimmen</button>		
+		  <button name="vote" name = "vote" id="vote" value=<% out.print( s.getDate()+";" + s.getEssen()+";"+s.getVotes());%> type="submit" >Für <% out.print(s.getEssen()); %> abstimmen</button>		
 		  <P>
 		 <%
 	 }
 	}
 		
 	%>
- 
-  
- 
-		 
-
+	  </form>
 </body>
 </html>
