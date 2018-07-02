@@ -46,7 +46,7 @@ public class Vote extends HttpServlet {
 		log("vote: " + vote);
 		try {
 			EssenBean essen = new EssenBean(vote);
-			essen.vote((String)request.getParameter("userName"));
+			essen.vote((String)request.getSession().getAttribute("userName"));
 			//essen.vote("testUser");
 		} catch (Exception e) {
 			System.err.println( e.getMessage());

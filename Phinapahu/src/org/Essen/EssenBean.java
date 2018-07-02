@@ -118,7 +118,8 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	public boolean userVote(String date, String user) {
 		Set<String> voteSet = new TreeSet<String>();
-		File votes = new File("Votes.txt");
+		File votes = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt");
+		//"..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt"
 		if (votes.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(votes))) {
 				while (br.ready())
@@ -143,7 +144,8 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	public void delete() {
 		Set<String> essenStringSet = new TreeSet<String>();
-		File essen = new File("Essen.txt");
+		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
+		//"..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt"
 		if (essen.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
 				while (br.ready())
@@ -162,7 +164,7 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public void saveThis() {
-		File essen = new File("Essen.txt");
+		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, true))) {
 			pw.println(this.date + ";" + this.essen + ";" + this.votes);
 		} catch (IOException e) {
@@ -173,7 +175,7 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	protected boolean checkDate(String date) {
 		Set<String> dateSet = new TreeSet<String>();
-		File dates = new File("dates.txt");
+		File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
 		if (dates.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
 				while (br.ready())

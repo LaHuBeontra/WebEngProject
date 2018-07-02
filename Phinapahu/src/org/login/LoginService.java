@@ -25,7 +25,7 @@ public class LoginService {
 	List<String> userStrings      = new ArrayList<>();
 	List<String> householdStrings = new ArrayList<>();
 	List<String> passwordStrings  = new ArrayList<>();
-	final File   folder           = new File("C:\\Users\\hlahr\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
+	final File   folder           = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
 
 	public LoginService() {
 		//Fetch List of Users/ Households from FileSystem

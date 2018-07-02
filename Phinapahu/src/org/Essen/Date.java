@@ -58,7 +58,8 @@ public class Date extends HttpServlet {
 				sdfToDate.parse(dateString);
 				log("Datum: " + dateString + " erfolgreich");
 
-				File dates = new File("dates.txt");
+				File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
+				//"..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt"
 
 				try (PrintWriter pw = new PrintWriter(new FileWriter(dates, true))) {
 					pw.println(dateString);
