@@ -38,7 +38,7 @@ public class GetDates extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Set<String> getDateSet = new TreeSet<String>();
-		File dates = new File("dates.txt");
+		File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
 		if (dates.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
 				while (br.ready())

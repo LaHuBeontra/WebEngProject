@@ -38,10 +38,13 @@ public class EssenErstellen extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		log("Post geschafft");
+		//log("Post geschafft");
 		//log(request.getParameter("EssenDate")+"   "+ request.getParameter("Essen"));
-		if(request.getParameter("EssenDate") != null && request.getParameter("Essen")!= null) {
-			EssenBean essen = new EssenBean(request.getParameter("EssenDate"), request.getParameter("Essen"));
+		String dateString =request.getParameter("EssenDate"); 
+		String essenString = request.getParameter("Essen");
+		if(dateString != null && essenString != null) {
+			essenString = essenString.replace(" ", "_");
+			EssenBean essen = new EssenBean(dateString, essenString);
 			essen.saveThis();
 		}
 		

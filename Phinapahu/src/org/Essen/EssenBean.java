@@ -61,19 +61,22 @@ public class EssenBean implements Comparable<EssenBean> {
 	public EssenBean(String date, String essen) {
 		// System.out.println("Neues essen wird ertellt mit den Daten : " + essen + " am
 		// " + date);
-		if (checkDate(date)) {
-			this.date = date;
-			this.essen = essen;
-			this.votes = 0;
+		if (essen.contains(";")) {
+			System.out.println("Das Essen darf ; nicht enthalten");
 		} else {
-			System.out.println("datum nicht gefunden");
-			System.exit(0);
+			if (checkDate(date)) {
+				this.date = date;
+				this.essen = essen.replace(" ", "_");
+				this.votes = 0;
+			} else {
+				System.out.println("datum nicht gefunden");
+			}
+			// System.out.println("Essen erfolgreich erstellt");
 		}
-		// System.out.println("Essen erfolgreich erstellt");
 	}
 
 	public EssenBean(String string) {
-		//System.out.println(string);
+		// System.out.println(string);
 		try {
 			int datel = string.indexOf(";");
 			String date = string.substring(0, datel);
@@ -92,6 +95,7 @@ public class EssenBean implements Comparable<EssenBean> {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			System.exit(0);
 		}
 		// System.out.println("Essen erfolgreich erstellt");
 	}
@@ -105,7 +109,10 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public void vote(String user) {
-		// System.out.println(this.date+this.essen+this.votes+user);
+		// Der essen string sollte keine lehrzeichen enthalten , das macht momentan
+		// Fehler
+		// System.out.println("Essen vor dem vote: " + this.date + this.essen +
+		// this.votes + user);
 		if (userVote(this.date, user)) {
 			this.delete();
 			this.votes++;
@@ -113,12 +120,14 @@ public class EssenBean implements Comparable<EssenBean> {
 		} else {
 			System.out.println("Benutzer hat schon abgestimmt");
 		}
-
+		// System.out.println("Essen nach dem Vote: " + this.date + this.essen +
+		// this.votes + user);
 	}
 
 	public boolean userVote(String date, String user) {
 		Set<String> voteSet = new TreeSet<String>();
-		File votes = new File("Votes.txt");
+		File votes = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt");
+		// "..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt"
 		if (votes.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(votes))) {
 				while (br.ready())
@@ -128,8 +137,8 @@ public class EssenBean implements Comparable<EssenBean> {
 			}
 		}
 		if (voteSet.contains(user + ";" + date)) {
-			 System.out.println("der benutzer hat bereits abgestimmt");
-			 return false;
+			System.out.println("der benutzer hat bereits abgestimmt");
+			return false;
 		} else {
 			try (PrintWriter pw = new PrintWriter(new FileWriter(votes, true))) {
 				pw.println(user + ";" + date);
@@ -143,7 +152,8 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	public void delete() {
 		Set<String> essenStringSet = new TreeSet<String>();
-		File essen = new File("Essen.txt");
+		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
+		// "..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt"
 		if (essen.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
 				while (br.ready())
@@ -162,9 +172,13 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public void saveThis() {
-		File essen = new File("Essen.txt");
+		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, true))) {
-			pw.println(this.date + ";" + this.essen + ";" + this.votes);
+			this.essen = this.essen.replace(" ", "_");
+			if (this.date != null && this.essen != null) {
+				pw.println(this.date + ";" + this.essen + ";" + this.votes);
+				this.essen = this.essen.replace("_", " ");
+			}
 		} catch (IOException e) {
 			System.err.println("Fehler beim Schreiben: " + e.getMessage());
 		}
@@ -173,7 +187,7 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	protected boolean checkDate(String date) {
 		Set<String> dateSet = new TreeSet<String>();
-		File dates = new File("dates.txt");
+		File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
 		if (dates.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
 				while (br.ready())
@@ -188,4 +202,43 @@ public class EssenBean implements Comparable<EssenBean> {
 			return false;
 		}
 	}
+
+	/*public static Set<EssenBean> tagesessen() {
+		Set<EssenBean> tagesEssen = new TreeSet<EssenBean>();
+		Set<String> dateSet = new TreeSet<String>();
+		Set<EssenBean> essenSet = new TreeSet<EssenBean>();
+		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
+		if (essen.exists()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
+				while (br.ready()) {
+					try {
+						EssenBean test = new EssenBean(br.readLine());
+						essenSet.add(test);
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
+					}
+				}
+			} catch (Exception ee) {
+				System.err.println(ee.getMessage());
+			}
+		}
+		for (EssenBean s : essenSet) {
+			dateSet.add(s.date);
+		}
+		for (String s : dateSet) {
+			EssenBean initialEssen = new EssenBean(s, null);
+			tagesEssen.add(initialEssen);
+		}
+		for (EssenBean s : essenSet) {
+			for (EssenBean i : tagesEssen) {
+				if (i.date == s.date) {
+					if (s.votes > i.votes) {
+						i = s;
+					}
+				}
+			}
+		}
+		return tagesEssen;
+	}
+	*/
 }
