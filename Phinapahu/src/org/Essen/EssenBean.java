@@ -3,8 +3,6 @@ package org.Essen;
 import java.io.*;
 import java.util.*;
 
-import javax.sound.midi.ShortMessage;
-
 public class EssenBean implements Comparable<EssenBean> {
 	String date;
 	String essen;
@@ -203,17 +201,18 @@ public class EssenBean implements Comparable<EssenBean> {
 		}
 	}
 
-	/*public static Set<EssenBean> tagesessen() {
-		Set<EssenBean> tagesEssen = new TreeSet<EssenBean>();
-		Set<String> dateSet = new TreeSet<String>();
-		Set<EssenBean> essenSet = new TreeSet<EssenBean>();
+	public static  Set<EssenBean> tagesessen() {
+		Set<String> dateSet = new TreeSet<String>();		
+		List<EssenBean>essenArray = new ArrayList<EssenBean>();
+		List<EssenBean>tagesEssenArray = new ArrayList<EssenBean>();
+		
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		if (essen.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
 				while (br.ready()) {
 					try {
 						EssenBean test = new EssenBean(br.readLine());
-						essenSet.add(test);
+						essenArray.add(test);
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
@@ -222,23 +221,31 @@ public class EssenBean implements Comparable<EssenBean> {
 				System.err.println(ee.getMessage());
 			}
 		}
-		for (EssenBean s : essenSet) {
+		else {
+			System.out.println("File nicht gefunden");
+		}
+		for (EssenBean s : essenArray) {
 			dateSet.add(s.date);
 		}
 		for (String s : dateSet) {
-			EssenBean initialEssen = new EssenBean(s, null);
-			tagesEssen.add(initialEssen);
+			EssenBean initialEssen = new EssenBean(s, "");
+			tagesEssenArray.add(initialEssen);
 		}
-		for (EssenBean s : essenSet) {
-			for (EssenBean i : tagesEssen) {
-				if (i.date == s.date) {
-					if (s.votes > i.votes) {
-						i = s;
+		for ( int i = 0 ;i<essenArray.size();i++) {
+			for (int j = 0;j<tagesEssenArray.size();j++) {
+				if(essenArray.get(i).date.equals(tagesEssenArray.get(j).date)) {
+					if (essenArray.get(i).votes > tagesEssenArray.get(j).votes) {
+						tagesEssenArray.remove(tagesEssenArray.get(j));
+						tagesEssenArray.add(essenArray.get(i));
 					}
 				}
 			}
 		}
-		return tagesEssen;
+		Set<EssenBean> loesungSet = new TreeSet<EssenBean>();
+		for(EssenBean s :tagesEssenArray ) {
+			loesungSet.add(s);
+		}
+		return loesungSet;
 	}
-	*/
+	
 }

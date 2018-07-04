@@ -92,6 +92,7 @@
 	 %>
 	 <P>
 	 Tagesessen:
+	 <p>
 	 <%
 	 for(EssenBean s :tagesEssenSet){
 		 out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 

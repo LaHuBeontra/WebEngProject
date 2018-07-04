@@ -71,6 +71,9 @@ public class Date extends HttpServlet {
 				log("Fehler bei der Datumsumwandlung: "+dateString);
 			}
 		}
+		else {
+			System.out.println("Das Datum ist leer");
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 

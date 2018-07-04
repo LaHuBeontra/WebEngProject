@@ -34,16 +34,16 @@ public class GetTagesessen extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		/*Set<EssenBean> getTagesEssen = new TreeSet<EssenBean>();
+		Set<EssenBean> getTagesEssen = new TreeSet<EssenBean>();
 		try {
-			 getTagesEssen = EssenBean.tagesessen();
+			 getTagesEssen =  EssenBean.tagesessen();
 			//Funktion funkioniert noch nicht
 			log("size of DateList: " + getTagesEssen.size());
 			request.setAttribute("getTagesEssen", getTagesEssen);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		*/
+		
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 	}
