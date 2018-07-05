@@ -25,7 +25,7 @@ public class LoginService {
 	List<String> userStrings      = new ArrayList<>();
 	List<String> householdStrings = new ArrayList<>();
 	List<String> passwordStrings  = new ArrayList<>();
-	final File   folder           = new File("C:\\Users\\hlahr\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
+	final File   folder           = new File("C:\\Users\\phils\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
 
 	public LoginService() {
 		//Fetch List of Users/ Households from FileSystem
@@ -34,6 +34,7 @@ public class LoginService {
 	
 	//Takes users, households and passwords from FileSystem and saves them to lists
 	public void addHouseholdAndUserNamesToLists(File folder) {
+		
 		emptyLists();
 	    for (File household : folder.listFiles()) {
 	        householdStrings.add(household.getName());

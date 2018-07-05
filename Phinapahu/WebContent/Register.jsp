@@ -23,32 +23,37 @@
 					<form action="RegisterServlet" method="post">
 						<div class="form-group">
 
-							<label for="UserName">Name</label><br/><input name="UserName"
+							<label for="UserName">Name</label><br/><input class="form-control" name="UserName"
 								type="text" value="${param.UserName}" />
 						</div>
 						<div class="form-group">
 
-							<label for="Email">Email</label><br/><input name="Email" type="text"
+							<label for="Email">Email</label><br/><input class="form-control" name="Email" type="email"
 								value="${param.Email}" />
 						</div>
 						<div class="form-group">
 
-							<label for="Password">Password</label><br/><input name="Password"
+							<label for="Password">Password</label><br/><input class="form-control" name="Password"
 								type="password" value="${param.Password}" />
 						</div>
 
-
-						<div class="radio"></div>
-						<label><input type="radio" name="Household" value="Create"
-							checked="checked"> Create Household</label>
-						<div class="radio">
-							<input type="radio" name="Household" value="Join"> Join
-							Household
+						<div class="form-check radio-cyan-gap">						
+							<input id="create" class="form-check-input with-gap" type="radio" name="Household" value="Create"
+							checked="checked">
+							<label class ="form-check-label" for ="create"> Create Household</label>
 						</div>
+						<div class="form-check radio-cyan-gap">
+							<input id = "join" class="form-check-input with-gap" type="radio" name="Household" value="Join">
+							<label class ="form-check-label" for ="join"> Join Household</label>
+						</div>
+						
 						<br/>
 						<div class="form-group">
 							<button class="btn btn-primary" name="continue" type="submit">Continue</button>
 						</div>
+						
+						
+
 
 					</form>
  				</div>

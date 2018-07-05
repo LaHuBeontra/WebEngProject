@@ -55,15 +55,11 @@
 									<!-- Third column: Actions -->
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/ToggleStatusServlet.java"
+											action="ToggleStatusServlet.java"
 											method="post">
 											<input type="hidden" name="toggleUser"
 												value="${user}"> 
-<!-- 											<input -->
-<!-- 												class = "btn btn-primary" -->
-<!-- 												type="submit" -->
-<!-- 												value="Toggle Status" -->
-<%-- 												onclick="return confirm('Are you sure you want to change the Status of ${user}?')"> --%>
+
 											<button class ="btn btn-secondary" type = "submit" onclick = "return confirm('Are you sure you want to change the Status of ${user}?')">
 											<i class ="fa fa-sync"></i> Toggle Status
 											</button>
@@ -71,14 +67,11 @@
 										</td>
 										<td>
 										<form
-											action="${pageContext.request.contextPath}/DeleteMemberServlet.java"
+											action="DeleteMemberServlet.java"
 											method="post">
 											<input type="hidden" name="deleteUser"
 												value="${user}"> 
-<!-- 												<input -->
-<!-- 												class="btn btn-primary" type="submit" -->
-<!-- 												value="Delete Member" -->
-<%-- 												onclick="return confirm('Are you sure you want to remove ${user} from your Household? :(')"> --%>
+
 											<button class = "btn btn-secondary" type="submit" onclick = "return confirm('Are you sure you want to remove ${user} from your Household? :(')">
 											<i class ="fa fa-trash"></i> Delete Member
 											</button>
@@ -92,11 +85,10 @@
 				</div>
 
 
-				<form action="${pageContext.request.contextPath}/AddMember.jsp">
-<!-- 					<input class="btn btn-primary" type="submit" value="Add Member" -->
-<!-- 						onclick="return confirm('Do you want to add a new Member to your Household? :D')"> -->
+				<form action="AddMember.jsp">
+
 					<button class ="btn btn-primary" type ="submit" onclick = "return confirm('Do you want to add a new Member to your Household? :D')">
-					<i class ="fa fa-plus"></i> Add Member
+					<i class ="fa fa-user-plus"></i> Add Member
 					</button>
 				</form>
 			</div>

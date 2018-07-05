@@ -10,7 +10,9 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script> -->
 
 </head>
 <body>
@@ -21,7 +23,7 @@
 			<div
 				class="jumbotron col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 margin">
     <h3>You can't use actions on yourself! :(</h3>
-	<form action="${pageContext.request.contextPath}/ManagementServlet.java" method="get">
+	<form action="ManagementServlet.java" method="get">
         <input class = "btn btn-primary"  type="submit" value="Go Back!" />
     </form>
     </div>

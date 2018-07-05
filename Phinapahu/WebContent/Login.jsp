@@ -10,6 +10,8 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -29,17 +31,17 @@
 
 					<div class="form-group">
 						<label for="UserName">UserName</label><br />
-						<input name="UserName" type="text" value="${param.UserName}" />
+						<input class="form-control" name="UserName" type="text" value="${param.UserName}" />
 					</div>
 
 
 					<div class="form-group">
 						<label class="control-label" for="Password">Password</label><br />
-						<input name="Password" type="password" value="${param.Password}" />
+						<input class="form-control" name="Password" type="password" value="${param.Password}" />
 					</div>
 					<div class="form-group">
-						<button class="btn btn-primary" name="login" type="submit">Sign
-							In</button>
+						<button class="btn btn-primary" name="login" type="submit">
+						 <i class = "fa fa-sign-in-alt"></i> Sign In</button>
 					</div>
 					<div>
 						<a class="text-info" href="Register.jsp">Sign Up</a>

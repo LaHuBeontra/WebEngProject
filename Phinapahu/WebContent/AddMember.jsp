@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,40 +9,60 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 <script language="javascript">
-//Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
-function textareaReplaceLineBreaks(){
-	document.getElementById("invitationText").value = document.getElementById("invitationText").value.replace(/(\r\n|\n)/g, "<br/>");
-}
+	//Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
+	function textareaReplaceLineBreaks() {
+		document.getElementById("invitationText").value = document
+				.getElementById("invitationText").value.replace(/(\r\n|\n)/g,
+				"<br/>");
+	}
 </script>
 </head>
 <body>
-<jsp:include page="Header.jsp"/>
-<div class="container content">
+	<jsp:include page="Header.jsp" />
+
+	<div class="container content">
 		<div class="row">
+			<div
+				class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-7 col-xl-6 margin">
 
-			<div class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4">
-<p>What's the E-Mail of your new Member?</p>
+				<p>What's the E-Mail of your new Member?</p>
 
 
-<h3 style="color:red">${emailError}</h3>
+				<h3 style="color: red">${emailError}</h3>
 
-<form action="${pageContext.request.contextPath}/AddMemberServlet.java" method="post">
-    <p>
-        <input name ="MemberEmail" type ="text" value="${param.MemberEmail}"/>
-    </p>
-    
-    Please enter a text that will be sent to the person you want to invite:<br/>
-	<textarea id = "invitationText" name = "invitationText" rows="5" cols="50" >Enter invitation mail...</textarea><br/>
-    <p>
-        <input class = "btn btn-primary" type="submit" onclick="textareaReplaceLineBreaks();" value="Add Member"/>
-    </p>
+				<form action="AddMemberServlet.java" method="post">
 
-</form>
-</div>
-</div>
-</div>
+					<p>
+						<input class="form-control" name="MemberEmail" type="email"
+							value="${param.MemberEmail}" />
+					</p>
+
+					<br />
+					<div class="form-group">
+						<label for="invitationText">Please enter a text that will
+							be sent to the person you want to invite:</label>
+						<textarea onfocus="this.value=''" class="form-control"
+							id="invitationText" name="invitationText">Enter invitation mail...</textarea>
+					</div>
+					<br />
+
+
+
+					<button class="btn btn-primary" type="submit"
+						onclick="textareaReplaceLineBreaks();">
+						<i class="fa fa-user-plus"></i> Add Member
+					</button>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
