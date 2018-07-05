@@ -1,0 +1,9 @@
+24.04.1997;Kartoffeln_mit_Kräuterquark;4
+24.04.1997;Test_test;1
+24.04.1997;space test;0
+24.04.1997;testen_machtspaß;1
+25.04.1997;TestEssen1;1
+25.04.1997;TestEssen2;0
+25.04.1997;super_test;1
+25.04.1997;test;3
+24.04.1997;Curry_mit_Reis;7

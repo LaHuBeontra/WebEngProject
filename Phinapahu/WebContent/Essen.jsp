@@ -8,6 +8,7 @@
 <title>Essensabstimmung</title>
 </head>
 <body>
+<h3 style="color:red">${voteMessage}</h3>
 
 	<%@ page import="java.util.*"%>
 
@@ -64,16 +65,16 @@
 		essenSet = ((Set<EssenBean>) request.getAttribute("getEssenSet")) ;
 	 %>
 	  </form>
-	 <P>
-	 
+	  
+	 <P></P>
+	   
 	  <form action="Vote" method="post">
+	
 	 <%
 	 for(EssenBean s :essenSet){
-		out.println(s.getEssen() + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
-		 //Voted noch für alle essen muss noch angepasst werden
-		 //log(s.getDate()+";" + s.getEssen()+";"+s.getVotes());
+		out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 %>		
-		  <button name="vote" name = "vote" id="vote" value=<% out.print( s.getDate()+";" + s.getEssen()+";"+s.getVotes());%> type="submit" >Für <% out.print(s.getEssen()); %> abstimmen</button>		
+		  <button name="vote" name = "vote" id="vote" value=<% out.print( s.getDate()+";" + s.getEssen()+";"+s.getVotes());%> type="submit" >Für <% out.print(s.getEssen().replace("_", " ")); %> abstimmen</button>		
 		  <P>
 		 <%
 	 }
@@ -81,5 +82,28 @@
 		
 	%>
 	  </form>
+	  
+	  <p>
+	  <form action="GetTagesessen" method="get">
+	<button name="getTagesessen" type="submit">Tagesessen Anzeigen</button>
+	<% 
+	Set<EssenBean> tagesEssenSet = new TreeSet<EssenBean>();
+	if((Set<EssenBean>) request.getAttribute("getTagesEssen") != null){
+		tagesEssenSet = ((Set<EssenBean>) request.getAttribute("getTagesEssen")) ;
+	 %>
+	 <P>
+	 Tagesessen:
+	 <p>
+	 <%
+	 for(EssenBean s :tagesEssenSet){
+		 out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
+		 %>
+		 <P>
+		 <%
+	 }
+	}
+		
+	%>
+  </form>
 </body>
 </html>

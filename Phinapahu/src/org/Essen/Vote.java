@@ -43,18 +43,21 @@ public class Vote extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		String vote = request.getParameter("vote");
-		log("vote: " + vote);
+		// log("vote: " + vote);
 		try {
 			EssenBean essen = new EssenBean(vote);
-			essen.vote((String)request.getSession().getAttribute("userName"));
-			//essen.vote("testUser");
+			String voteMessage = essen.vote((String) request.getSession().getAttribute("userName"));
+			request.setAttribute("voteMessage", voteMessage);
+			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
+			rd.forward(request, response);
 		} catch (Exception e) {
-			System.err.println( e.getMessage());
+			System.err.println(e.getMessage());
 		}
 
 		// Aus dem essen und dem datum das essen finden und voten
-		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
+		/*RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
+		*/
 	}
 
 }
