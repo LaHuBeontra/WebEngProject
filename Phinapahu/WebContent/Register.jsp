@@ -1,35 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register Page</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/Management.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h3 style="color:red">${registrationError}</h3>
-<form action="RegisterServlet" method ="post">
-	<p>
-		<label for ="UserName">Name</label> <input name ="UserName" type ="text" value="${param.UserName}"/>
-	</p>
-	<p>
-		<label for="Email">Email</label> <input name="Email" type="text"
-				value="${param.Email}" />
-	</p>
-	<p>
-		<label for="Password">Password</label> <input name="Password" type="password"
-				value="${param.Password}" />
-	</p>
+	<jsp:include page="Header.jsp" />
 
-	<p>
-		<input type="radio" name="Household" value ="Create" checked = "checked">Create Household
-	</p>
-	<p>
-		<input type="radio" name="Household" value ="Join">Join Household
-	</p>
-	<p>
-		<button name= "continue" type = "submit">Continue</button>
-	</p>
-</form>
+	<div class="container content">
+		<div class="row">
+
+			<div class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 margin">
+					<h1 class="text-center">Register</h1>
+					<br>
+					<h5 style="color: red">${registrationError}</h5>
+					<form action="RegisterServlet" method="post">
+						<div class="form-group">
+
+							<label for="UserName">Name</label><br/><input name="UserName"
+								type="text" value="${param.UserName}" />
+						</div>
+						<div class="form-group">
+
+							<label for="Email">Email</label><br/><input name="Email" type="text"
+								value="${param.Email}" />
+						</div>
+						<div class="form-group">
+
+							<label for="Password">Password</label><br/><input name="Password"
+								type="password" value="${param.Password}" />
+						</div>
+
+
+						<div class="radio"></div>
+						<label><input type="radio" name="Household" value="Create"
+							checked="checked"> Create Household</label>
+						<div class="radio">
+							<input type="radio" name="Household" value="Join"> Join
+							Household
+						</div>
+						<br/>
+						<div class="form-group">
+							<button class="btn btn-primary" name="continue" type="submit">Continue</button>
+						</div>
+
+					</form>
+ 				</div>
+			</div>
+		</div>
 </body>
 </html>

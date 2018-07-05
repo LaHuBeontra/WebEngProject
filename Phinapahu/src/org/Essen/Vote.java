@@ -48,7 +48,6 @@ public class Vote extends HttpServlet {
 			EssenBean essen = new EssenBean(vote);
 			String voteMessage = essen.vote((String) request.getSession().getAttribute("userName"));
 			request.setAttribute("voteMessage", voteMessage);
-			//log("Nachicht: " + voteMessage);
 			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

@@ -25,7 +25,7 @@ public class LoginService {
 	List<String> userStrings      = new ArrayList<>();
 	List<String> householdStrings = new ArrayList<>();
 	List<String> passwordStrings  = new ArrayList<>();
-	final File   folder           = new File("C:\\Users\\hlahr\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
+	final File   folder           = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
 
 	public LoginService() {
 		//Fetch List of Users/ Households from FileSystem
@@ -236,10 +236,15 @@ public class LoginService {
 
 	//True if email is in a valid format
 	private boolean isEmailValid(String email) {
+
+  if(email == null) {
+			return false;
+		}else {
 		final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 				Pattern.CASE_INSENSITIVE);
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 		return matcher.find();
+		}
 	}
 	
 	//True if all emails are valid
@@ -250,6 +255,7 @@ public class LoginService {
 				valid = false;
 			}
 		}
+
 		return valid;
 	}
 

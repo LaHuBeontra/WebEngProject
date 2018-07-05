@@ -4,7 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
+<title>Add User</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/Management.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 <script language="javascript">
 //Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
@@ -14,11 +19,17 @@ function textareaReplaceLineBreaks(){
 </script>
 </head>
 <body>
+<jsp:include page="Header.jsp"/>
+<div class="container content">
+		<div class="row">
+
+			<div class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4">
 <p>What's the E-Mail of your new Member?</p>
+
 
 <h3 style="color:red">${emailError}</h3>
 
-<form action="${pageContext.request.contextPath}/AddMemberServlet.java" method="post">
+<form action="AddMemberServlet.java" method="post">
     <p>
         <input name ="MemberEmail" type ="text" value="${param.MemberEmail}"/>
     </p>
@@ -26,8 +37,12 @@ function textareaReplaceLineBreaks(){
     Please enter a text that will be sent to the person you want to invite:<br/>
 	<textarea id = "invitationText" name = "invitationText" rows="5" cols="50" >Enter invitation mail...</textarea><br/>
     <p>
-        <input type="submit" onclick="textareaReplaceLineBreaks();" value="Add Member"/>
+        <input class = "btn btn-primary" type="submit" onclick="textareaReplaceLineBreaks();" value="Add Member"/>
     </p>
+
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
