@@ -8,6 +8,7 @@
 <title>Essensabstimmung</title>
 </head>
 <body>
+<h3 style="color:red">${voteMessage}</h3>
 
 	<%@ page import="java.util.*"%>
 
@@ -65,9 +66,10 @@
 	 %>
 	  </form>
 	  
-	 <P>
-	 
+	 <P></P>
+	   
 	  <form action="Vote" method="post">
+	
 	 <%
 	 for(EssenBean s :essenSet){
 		out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
@@ -85,7 +87,6 @@
 	  <form action="GetTagesessen" method="get">
 	<button name="getTagesessen" type="submit">Tagesessen Anzeigen</button>
 	<% 
-	//Fix this
 	Set<EssenBean> tagesEssenSet = new TreeSet<EssenBean>();
 	if((Set<EssenBean>) request.getAttribute("getTagesEssen") != null){
 		tagesEssenSet = ((Set<EssenBean>) request.getAttribute("getTagesEssen")) ;

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
+
 /**
  * Servlet implementation class EssenErstellen
  */
@@ -33,17 +35,13 @@ public class EssenErstellen extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
-		// log("Post geschafft");
-		// log(request.getParameter("EssenDate")+" "+ request.getParameter("Essen"));
 		String dateString = request.getParameter("EssenDate");
 		String essenString = request.getParameter("Essen");
 		if (dateString != "") {
@@ -51,8 +49,11 @@ public class EssenErstellen extends HttpServlet {
 				essenString = essenString.replace(" ", "_");
 				try {
 					EssenBean essen = new EssenBean(dateString, essenString);
-					essen.saveThis();
+					if(essen.validate()){
+						essen.saveThis();
+					}					
 				} catch (Exception e) {
+					System.out.println("test");
 					System.err.println(e.getMessage());
 				}
 

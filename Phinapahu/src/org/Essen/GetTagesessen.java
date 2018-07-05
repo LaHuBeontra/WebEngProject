@@ -37,8 +37,7 @@ public class GetTagesessen extends HttpServlet {
 		Set<EssenBean> getTagesEssen = new TreeSet<EssenBean>();
 		try {
 			 getTagesEssen =  EssenBean.tagesessen();
-			//Funktion funkioniert noch nicht
-			log("size of DateList: " + getTagesEssen.size());
+			log("Size of TagesessenList: " + getTagesEssen.size());
 			request.setAttribute("getTagesEssen", getTagesEssen);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
