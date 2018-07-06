@@ -43,6 +43,7 @@ public class EssenErstellen extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		String dateString = request.getParameter("EssenDate");
+		System.out.println(dateString);
 		String essenString = request.getParameter("Essen");
 		if (dateString != "") {
 			if (essenString != "") {

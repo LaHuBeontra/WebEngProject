@@ -50,13 +50,15 @@ public class Date extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String dateString = request.getParameter("Date");
+		String dateString = request.getParameter("date");
+		System.out.println(dateString);
 		if (dateString.length() > 0) {
 
 			SimpleDateFormat sdfToDate = new SimpleDateFormat("dd.MM.yyyy");
 			try {
 				sdfToDate.parse(dateString);
 				//log("Datum: " + dateString + " erfolgreich");
+				//File dates = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/dates.txt");
 
 				File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
 				//"..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt"

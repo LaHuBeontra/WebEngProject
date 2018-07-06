@@ -1,6 +1,27 @@
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
 
-.error{
-	color: #117888;
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #0f6d7b;
+  border-color: #0f6d7b;
+}
+
+
+
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
 }
 .top5{
 	margin-top: 3%
@@ -65,4 +86,11 @@ body {
 .fa-cog {
   color: black;
   background: transparent;
+}
+
+.icon-right{
+	float: left;
+}
+.my-icon{
+	line-height:40px
 }
