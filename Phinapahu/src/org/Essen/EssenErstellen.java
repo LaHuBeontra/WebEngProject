@@ -35,6 +35,7 @@ public class EssenErstellen extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -44,28 +45,30 @@ public class EssenErstellen extends HttpServlet {
 		doGet(request, response);
 		String dateString = request.getParameter("EssenDate");
 		String essenString = request.getParameter("Essen");
-		if (dateString != "") {
-			if (essenString != "") {
-				essenString = essenString.replace(" ", "_");
-				try {
-					EssenBean essen = new EssenBean(dateString, essenString);
-					if(essen.validate()){
-						essen.saveThis();
-					}					
-				} catch (Exception e) {
-					System.out.println("test");
-					System.err.println(e.getMessage());
+		System.out.println("dateString: " + dateString + " essenString: " + essenString);
+		if (dateString != null && essenString != null) {
+			if (dateString != "") {
+				if (essenString != "") {
+					essenString = essenString.replace(" ", "_");
+					try {
+						EssenBean essen = new EssenBean(dateString, essenString);
+						if (essen.validate()) {
+							essen.saveThis();
+						}
+					} catch (Exception e) {
+						System.out.println("test");
+						System.err.println(e.getMessage());
+					}
+
+				} else {
+					System.out.println("Das essen ist leer");
 				}
+			} else
 
-			} else {
-				System.out.println("Das essen ist leer");
+			{
+				System.out.println("Das Datum ist leer");
 			}
-		} else
-
-		{
-			System.out.println("Das Datum ist leer");
 		}
-
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 	}

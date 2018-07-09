@@ -19,43 +19,55 @@
 		<button name="addDate" type="submit">Datum hinzufügen</button>
 
 	</form>
-	<p>
-	<form action="EssenErstellen" method="post">
-		<label for="EssenDate">Datum</label> <input name="EssenDate" type="text"
-			value="${param.EssenDate}" /> <label for="Essen">Essen</label> <input
-			name="Essen" type="text" value="${param.Essen}" />
-
-		<button name="addEssen" type="submit">Essen hinzufügen</button>
-	</form>
-
-	<p>
+	<br>
 	<h3>Daten</h3>
 
 	<form action="GetDates" method="get">
-	<button name="getDates" type="submit">Daten Anzeigen</button>
+	<button name="getDates" type="submit"> Neues Essen planen</button>
 	<% //List<String> dateList =new ArrayList<String>();
 	Set<String> dateSet = new TreeSet<String>();
 	if((Set<String>) request.getAttribute("getDateSet") != null){
 		dateSet = ((Set<String>) request.getAttribute("getDateSet")) ;
 	// out.print("Array nicht leer");
+	}
 	 %>
-	 <P>
-	 <%
-	 for(String s :dateSet){
-		out.println(s); 
-		 %>
-		 <P>
-		 <%
-	 }
-	// out.print(" das war das array");
-	}
-	else{
-		//out.print("Array leer");
-	}
-		
-	%>
+	 
   </form>
-  <p>
+  <br>
+	
+    <form action="EssenErstellen" method="post">
+  <%if (dateSet.size() >0){ %>  
+ 
+	 <label>Datum:</label>
+	
+	<select name="EssenDate" onchange="">
+				<% for(String s :dateSet){
+					%><option value=<%out.print(s); %>><%out.print(s); %></option><% 
+				}
+					
+				%>	
+			</select>
+			<br>
+			<br>
+			 <label>Essen:</label> <input
+	name="Essen" type="text" value="${param.Essen}" /> 
+			<br>
+			<br>
+			<button name ="save" type="submit">Essen erstellen</button>
+			<br>
+			<br>
+	<%} %>
+	
+<%/* for(String s :dateSet){
+			%><label><% out.print(s); %></label>
+		 
+		 <button name="EssenDate" name = "vote" id="vote" value=<% out.print(s);%> type="submit" >Dieses Essen am <% out.print(s); %> erstellen</button>		
+		  <br>		
+		 <%
+	 }	
+		
+	*/%>
+	</form>
   
 	<form action="GetEssen" method="get">
 	<button name="getEssen" type="submit">Essen Anzeigen</button>
@@ -66,7 +78,7 @@
 	 %>
 	  </form>
 	  
-	 <P></P>
+	 <br>
 	   
 	  <form action="Vote" method="post">
 	
@@ -75,7 +87,7 @@
 		out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 %>		
 		  <button name="vote" name = "vote" id="vote" value=<% out.print( s.getDate()+";" + s.getEssen()+";"+s.getVotes());%> type="submit" >Für <% out.print(s.getEssen().replace("_", " ")); %> abstimmen</button>		
-		  <P>
+		  <br>
 		 <%
 	 }
 	}
@@ -83,7 +95,7 @@
 	%>
 	  </form>
 	  
-	  <p>
+	  <br>
 	  <form action="GetTagesessen" method="get">
 	<button name="getTagesessen" type="submit">Tagesessen Anzeigen</button>
 	<% 
@@ -91,14 +103,14 @@
 	if((Set<EssenBean>) request.getAttribute("getTagesEssen") != null){
 		tagesEssenSet = ((Set<EssenBean>) request.getAttribute("getTagesEssen")) ;
 	 %>
-	 <P>
+	 <br>
 	 Tagesessen:
-	 <p>
+	 <br>
 	 <%
 	 for(EssenBean s :tagesEssenSet){
 		 out.println(s.getEssen().replace("_", " ") + " am " + s.getDate()+ " mit "+ s.getVotes() + " stimmen"); 
 		 %>
-		 <P>
+		 <br>
 		 <%
 	 }
 	}
