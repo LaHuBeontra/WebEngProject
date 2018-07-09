@@ -9,6 +9,7 @@
 </head>
 <body>
 <h3 style="color:red">${voteMessage}</h3>
+<h3 style="color:red">${essenMessage}</h3>
 
 	<%@ page import="java.util.*"%>
 
@@ -57,16 +58,6 @@
 			<br>
 			<br>
 	<%} %>
-	
-<%/* for(String s :dateSet){
-			%><label><% out.print(s); %></label>
-		 
-		 <button name="EssenDate" name = "vote" id="vote" value=<% out.print(s);%> type="submit" >Dieses Essen am <% out.print(s); %> erstellen</button>		
-		  <br>		
-		 <%
-	 }	
-		
-	*/%>
 	</form>
   
 	<form action="GetEssen" method="get">

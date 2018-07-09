@@ -46,6 +46,7 @@ public class EssenErstellen extends HttpServlet {
 		String dateString = request.getParameter("EssenDate");
 		String essenString = request.getParameter("Essen");
 		System.out.println("dateString: " + dateString + " essenString: " + essenString);
+		String essenMessage = null;
 		if (dateString != null && essenString != null) {
 			if (dateString != "") {
 				if (essenString != "") {
@@ -54,6 +55,7 @@ public class EssenErstellen extends HttpServlet {
 						EssenBean essen = new EssenBean(dateString, essenString);
 						if (essen.validate()) {
 							essen.saveThis();
+							essenMessage = "Essen erfolgreich erstellt";
 						}
 					} catch (Exception e) {
 						System.out.println("test");
@@ -62,13 +64,17 @@ public class EssenErstellen extends HttpServlet {
 
 				} else {
 					System.out.println("Das essen ist leer");
+					essenMessage = "Das Essen ist leer";
 				}
 			} else
 
 			{
 				System.out.println("Das Datum ist leer");
+				essenMessage = "Das Datum ist leer";
 			}
 		}
+		System.out.println("essenMessage: "+ essenMessage);
+		request.setAttribute("essenMessage", essenMessage);
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 	}
