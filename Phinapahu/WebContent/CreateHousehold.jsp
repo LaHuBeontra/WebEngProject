@@ -11,9 +11,10 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src = "jquery/jquery-3.3.1.min.js"></script>
 
 
-<SCRIPT type="text/javascript">
+<script type="text/javascript">
 	var counter = 0;
 	function add(type) {
 		//Create an input type dynamically.
@@ -30,15 +31,16 @@
 		//Append the element in page (in span).
 		foo.appendChild(element);
 	}
+	
 	//Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
 	function textareaReplaceLineBreaks() {
 		document.getElementById("invitationText").value = document
 				.getElementById("invitationText").value.replace(/(\r\n|\n)/g,
 				"<br/>");
 	}
-</SCRIPT>
-</HEAD>
-<BODY>
+</script>
+</head>
+<body>
 	<jsp:include page="Header.jsp" />
 	<div class="container content">
 		<div class="row">
@@ -87,5 +89,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page ="Footer.jsp"/>
 </BODY>
 </HTML>

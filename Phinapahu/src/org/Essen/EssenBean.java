@@ -118,9 +118,9 @@ public class EssenBean implements Comparable<EssenBean> {
 			this.delete();
 			this.votes++;
 			this.saveThis();
-			return ("Erfolgreich abgestimmt");
+			return ("Vote was successful!");
 		} else {
-			return ("Benutzer hat schon abgestimmt");
+			return ("You have only one vote per day!");
 		}
 	}
 

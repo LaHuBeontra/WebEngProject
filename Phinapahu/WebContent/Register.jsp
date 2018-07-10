@@ -9,6 +9,7 @@
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -24,20 +25,20 @@
 				<form action="RegisterServlet" method="post">
 					<div class="form-group">
 
-						<label for="UserName">Name</label><br />
-						<input class="form-control" name="UserName" type="text"
+						<label for="UserName">Name</label><br /> <input
+							class="form-control" name="UserName" type="text"
 							value="${param.UserName}" />
 					</div>
 					<div class="form-group">
 
-						<label for="Email">Email</label><br />
-						<input class="form-control" name="Email" type="email"
+						<label for="Email">Email</label><br /> <input
+							class="form-control" name="Email" type="email"
 							value="${param.Email}" />
 					</div>
 					<div class="form-group">
 
-						<label for="Password">Password</label><br />
-						<input class="form-control" name="Password" type="password"
+						<label for="Password">Password</label><br /> <input
+							class="form-control" name="Password" type="password"
 							value="${param.Password}" />
 					</div>
 
@@ -53,16 +54,14 @@
 					</div>
 
 					<br />
+					
 					<div class="form-group">
 						<button class="btn btn-primary" name="continue" type="submit">Continue</button>
 					</div>
-
-
-
-
 				</form>
 			</div>
 		</div>
 	</div>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>

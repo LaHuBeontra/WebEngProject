@@ -94,3 +94,27 @@ body {
 .my-icon{
 	line-height:40px
 }
+
+#footer{
+	position:fixed;
+	width: 100%;
+	bottom: 0;
+	font-size: 12px;
+}
+
+.blacktext{
+	color:black;
+}
+.panel-body{
+	opacity:0.8;
+	background-color: #e9ecef;
+	padding: 0px 20px;
+	
+}
+.einruecken-left{
+	padding: 0px 20px;
+}
+
+ul{
+	list-style-type: none;
+}
