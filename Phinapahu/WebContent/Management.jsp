@@ -13,7 +13,7 @@
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src = "jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -24,8 +24,6 @@
 				class="jumbotron col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 margin">
 				<h1>Hi ${userName}, this is your household ${householdName}!</h1>
 				<p id="test">How are you doing?</p>
-				
-				<h3 class ="error">${managementError}</h3>
 				
 				<div class="table-striped">
 					<table class = "table">
@@ -57,15 +55,11 @@
 									<!-- Third column: Actions -->
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/ToggleStatusServlet.java"
+											action="ToggleStatusServlet.java"
 											method="post">
 											<input type="hidden" name="toggleUser"
 												value="${user}"> 
-<!-- 											<input -->
-<!-- 												class = "btn btn-primary" -->
-<!-- 												type="submit" -->
-<!-- 												value="Toggle Status" -->
-<%-- 												onclick="return confirm('Are you sure you want to change the Status of ${user}?')"> --%>
+
 											<button class ="btn btn-secondary" type = "submit" onclick = "return confirm('Are you sure you want to change the Status of ${user}?')">
 											<i class ="fa fa-sync"></i> Toggle Status
 											</button>
@@ -73,14 +67,11 @@
 										</td>
 										<td>
 										<form
-											action="${pageContext.request.contextPath}/DeleteMemberServlet.java"
+											action="DeleteMemberServlet.java"
 											method="post">
 											<input type="hidden" name="deleteUser"
 												value="${user}"> 
-<!-- 												<input -->
-<!-- 												class="btn btn-primary" type="submit" -->
-<!-- 												value="Delete Member" -->
-<%-- 												onclick="return confirm('Are you sure you want to remove ${user} from your Household? :(')"> --%>
+
 											<button class = "btn btn-secondary" type="submit" onclick = "return confirm('Are you sure you want to remove ${user} from your Household? :(')">
 											<i class ="fa fa-trash"></i> Delete Member
 											</button>
@@ -94,18 +85,18 @@
 				</div>
 
 
-				<form action="${pageContext.request.contextPath}/AddMember.jsp">
-<!-- 					<input class="btn btn-primary" type="submit" value="Add Member" -->
-<!-- 						onclick="return confirm('Do you want to add a new Member to your Household? :D')"> -->
+				<form action="AddMember.jsp">
+
 					<button class ="btn btn-primary" type ="submit" onclick = "return confirm('Do you want to add a new Member to your Household? :D')">
-					<i class ="fa fa-plus"></i> Add Member
+					<i class ="fa fa-user-plus"></i> Add Member
 					</button>
 				</form>
-				<a href="#" class ="btn btn-primary" role="button" style="margin-top: 1%; font-size: 170%;">
+				<a href="#" class ="btn btn-primary" style="margin-top: 1%; font-size: 170%;">
 					<i class="fas fa-utensils" style="margin-right: 2%"></i> Go To Meals!
 				</a>
 			</div>
 		</div>
 	</div>
+	<jsp:include page ="Footer.jsp"/>
 </body>
 </html>

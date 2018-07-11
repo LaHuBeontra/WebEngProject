@@ -38,6 +38,7 @@ public class GetEssen extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		Set<EssenBean> getEssenSet = new TreeSet<EssenBean>();
+		//File essen = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/essen.txt");
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		if (essen.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {

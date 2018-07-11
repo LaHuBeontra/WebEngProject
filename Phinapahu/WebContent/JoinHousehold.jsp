@@ -9,6 +9,7 @@
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -24,14 +25,14 @@
 				<br>
 
 				<h3 style="color: red">${JoinHouseholdError}</h3>
-				<div class="text text-info">Please enter the Password you received!
-				</div>
+				<div class="text text-info">Please enter the Password you
+					received!</div>
 				<br>
 				<form action="JoinHouseholdServlet" method="post">
 					<div class=form-group>
 						<label for="HouseholdPassword">Password of Household</label> <br>
-						<input name="HouseholdPassword" type="text"
-							value="${param.HouseholdPassword}" />
+						<input class="form-control" name="HouseholdPassword"
+							type="password" value="${param.HouseholdPassword}" />
 					</div>
 					<p>
 						<button class="btn btn-primary" name="login" type="submit">Register</button>
@@ -41,6 +42,6 @@
 			</div>
 		</div>
 	</div>
-
+<jsp:include page ="Footer.jsp"/>
 </body>
 </html>

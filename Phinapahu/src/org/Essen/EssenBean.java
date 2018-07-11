@@ -118,14 +118,16 @@ public class EssenBean implements Comparable<EssenBean> {
 			this.delete();
 			this.votes++;
 			this.saveThis();
-			return ("Erfolgreich abgestimmt");
+			return ("Vote was successful!");
 		} else {
-			return ("Benutzer hat schon abgestimmt");
+			return ("You have only one vote per day!");
 		}
 	}
 
 	public boolean userVote(String date, String user) {
 		Set<String> voteSet = new TreeSet<String>();
+		//File votes = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/votes.txt");
+
 		File votes = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt");
 		// "..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\votes.txt"
 		if (votes.exists()) {
@@ -152,6 +154,8 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	public void delete() {
 		Set<String> essenStringSet = new TreeSet<String>();
+		//File essen = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/essen.txt");
+
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		// "..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt"
 		if (essen.exists()) {
@@ -172,6 +176,8 @@ public class EssenBean implements Comparable<EssenBean> {
 	}
 
 	public void saveThis() {
+		//File essen = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/essen.txt");
+
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		try (PrintWriter pw = new PrintWriter(new FileWriter(essen, true))) {
 			this.essen = this.essen.replace(" ", "_");
@@ -187,6 +193,8 @@ public class EssenBean implements Comparable<EssenBean> {
 
 	protected boolean checkDate(String date) {
 		Set<String> dateSet = new TreeSet<String>();
+		//File dates = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/dates.txt");
+
 		File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
 		if (dates.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(dates))) {
@@ -207,6 +215,8 @@ public class EssenBean implements Comparable<EssenBean> {
 		Set<String> dateSet = new TreeSet<String>();
 		List<EssenBean> essenArray = new ArrayList<EssenBean>();
 		List<EssenBean> tagesEssenArray = new ArrayList<EssenBean>();
+
+		//File essen = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/essen.txt");
 
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		if (essen.exists()) {
