@@ -13,7 +13,7 @@
 	type="text/css" />
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src = "jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -91,8 +91,12 @@
 					<i class ="fa fa-user-plus"></i> Add Member
 					</button>
 				</form>
+				<a href="#" class ="btn btn-primary" style="margin-top: 1%; font-size: 170%;">
+					<i class="fas fa-utensils" style="margin-right: 2%"></i> Go To Meals!
+				</a>
 			</div>
 		</div>
 	</div>
+	<jsp:include page ="Footer.jsp"/>
 </body>
 </html>

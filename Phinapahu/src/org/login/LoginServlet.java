@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			//Redirect to Management.jsp if user is admin
 
             if (loginService.userIsAdmin(userName)) request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
-            else request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
+            else request.getRequestDispatcher("/Essen.jsp").forward(request, response);
         }  
         else{  
             request.setAttribute("registrationError", "Login was not successful :-[");

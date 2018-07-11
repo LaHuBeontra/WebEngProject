@@ -13,6 +13,7 @@
 	integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
 	crossorigin="anonymous">
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 
 </head>
 
@@ -25,12 +26,15 @@
 				class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-7 col-xl-6 margin">
 				<p>Email successfully sent to ${email}!!</p>
 				<p>
-					<a class = "btn btn-primary" href="ManagementServlet.java" >
-					<i class = "fa fa-arrow-right"> </i> Return to
-						Management Page!</a>
+
+					<a class="btn btn-primary" href="ManagementServlet.java"> <i
+						class="fa fa-arrow-right"> </i> Return to Management Page!
+					</a>
+
 				</p>
 			</div>
 		</div>
 	</div>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>

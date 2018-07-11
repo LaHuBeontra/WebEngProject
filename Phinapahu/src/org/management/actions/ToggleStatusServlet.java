@@ -40,7 +40,8 @@ public class ToggleStatusServlet extends HttpServlet {
 	        loginService.changeStatus(userName, status);
 	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
 	    } else {
-	    	request.getRequestDispatcher("/ManagementActionError.jsp").forward(request, response);
+	    	request.setAttribute("managementError", "You can't change your own Status!");
+	    	request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
 	    }
 	}
 

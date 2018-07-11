@@ -11,9 +11,10 @@
 <link href="css/Management.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src = "jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-<script language="javascript">
+<script type="text/javascript">
 	//Function adds html-Tag <br/> whenever the user entered a linebreak in the textarea
 	function textareaReplaceLineBreaks() {
 		document.getElementById("invitationText").value = document
@@ -51,8 +52,6 @@
 					</div>
 					<br />
 
-
-
 					<button class="btn btn-primary" type="submit"
 						onclick="textareaReplaceLineBreaks();">
 						<i class="fa fa-user-plus"></i> Add Member
@@ -63,6 +62,6 @@
 			</div>
 		</div>
 	</div>
-
+	<jsp:include page ="Footer.jsp"/>
 </body>
 </html>
