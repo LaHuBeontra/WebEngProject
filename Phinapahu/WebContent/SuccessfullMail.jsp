@@ -26,9 +26,11 @@
 				class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-7 col-xl-6 margin">
 				<p>Email successfully sent to ${email}!!</p>
 				<p>
+
 					<a class="btn btn-primary" href="ManagementServlet.java"> <i
 						class="fa fa-arrow-right"> </i> Return to Management Page!
 					</a>
+
 				</p>
 			</div>
 		</div>

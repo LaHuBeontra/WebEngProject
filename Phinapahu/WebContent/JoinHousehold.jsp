@@ -31,8 +31,10 @@
 				<form action="JoinHouseholdServlet" method="post">
 					<div class=form-group>
 						<label for="HouseholdPassword">Password of Household</label> <br>
+
 						<input class="form-control" name="HouseholdPassword"
 							type="password" value="${param.HouseholdPassword}" />
+
 					</div>
 					<p>
 						<button class="btn btn-primary" name="login" type="submit">Register</button>
