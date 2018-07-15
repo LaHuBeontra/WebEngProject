@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.login.LoginService;
+
 /**
  * Servlet implementation class GetEssen
  */
@@ -26,7 +28,6 @@ public class GetEssen extends HttpServlet {
 	 */
 	public GetEssen() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,10 +36,12 @@ public class GetEssen extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userName = (String) request.getSession().getAttribute("userName");
+		LoginService loginService = new LoginService();
+		request.setAttribute("userName", userName);
+		request.setAttribute("loginService", loginService);
+		
 		Set<EssenBean> getEssenSet = new TreeSet<EssenBean>();
-		//File essen = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/essen.txt");
 		File essen = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\essen.txt");
 		if (essen.exists()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(essen))) {
@@ -47,15 +50,14 @@ public class GetEssen extends HttpServlet {
 						EssenBean test = new EssenBean(br.readLine());
 						getEssenSet.add(test);
 					} catch (Exception e) {
-						System.err.println(e.getMessage());
+						e.printStackTrace();
 					}
 				}
 			} catch (Exception ee) {
-				System.err.println(ee.getMessage());
+				ee.printStackTrace();
 			}
 
 		}
-		log("size of EssenList: " + getEssenSet.size());
 		request.setAttribute("getEssenSet", getEssenSet);
 
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
@@ -68,7 +70,6 @@ public class GetEssen extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);

@@ -15,10 +15,10 @@ public class EmailService {
 		String result =null;
 		String from = sender;
 		
-		String registrationInformation = String.format("<br> Please visit the following website <br>" + 
-										"and enter this password <strong> %s </strong> during registration", password);
+		String registrationInformation = String.format("<strong>From your Phinapahu Team:</strong><br> Go to the Phinapahu website and choose \"Join Household\" during Sign-Up.<br>" + 
+										"Enter the Household Password <strong> %s </strong> when asked, and enjoy your time with Phinapahu!", password);
 		
-		emailContent = String.format("<p>%s</p> <p>%s</p>", emailContent,registrationInformation);
+		emailContent = String.format("<p>%s</p> <p>%s</p>", emailContent, registrationInformation);
 		
 		Properties properties = System.getProperties();
 		properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -44,7 +44,7 @@ public class EmailService {
 			}
 			message.setRecipients(Message.RecipientType.TO, addresses);
 			message.setFrom(new InternetAddress(from));			
-			message.setSubject("Join my Household");
+			message.setSubject("Join my Household!");
 			//message.setRecipient(Message.RecipientType.TO, new InternetAddress(from));
 			//message.setText(emailContent);
 			message.setContent(emailContent, "text/html; charset=utf-8");

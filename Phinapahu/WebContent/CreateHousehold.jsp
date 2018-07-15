@@ -48,7 +48,7 @@
 			<div class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 margin">
 				<h1 class="text-center">Create Household</h1>
 				<br>
-        <h3 style="color:red">${createHouseholdError}</h3>
+        <h3 style="color: #9a79d2">${createHouseholdError}</h3>
 				<FORM action="CreateHouseholdServlet" method="post"
 					accept-charset=utf-8>
 
@@ -59,13 +59,13 @@
 							value="${param.HouseholdName}" />
 					</div>
 					<div class="text text-info">
-						Click here to add Email Addresses of future household
-						members <br />
+						Click here to add E-Mail Addresses of future Household
+						members! <br />
 					</div>
-					<h5 style="color: red">${emailMissing}</h5>
+					<h5 style="color: #9a79d2">${emailMissing}</h5>
 
 					<button type="button" class="btn btn-secondary" onclick ="add(document.forms[0].text)">
-						<i class ="fa fa-plus"></i> Add Email
+						<i class ="fa fa-plus"></i> Add E-Mail
 					</button>
 
 						 <br> <span
@@ -75,8 +75,8 @@
 					<br/>
 					
 				<div class="form-group">
-						<label for="invitationText">Please enter a text that will
-							be sent to the person you want to invite:</label>
+						<label for="invitationText">Enter a text that will
+							be sent to invite your members:</label>
 						<textarea onfocus="this.value=''" class="form-control"
 							id="invitationText" name="invitationText">Enter invitation mail...</textarea>
 					</div>

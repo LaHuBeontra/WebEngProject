@@ -31,10 +31,10 @@
 			<div
 				class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-7 col-xl-6 margin">
 
-				<p>What's the E-Mail of your new Member?</p>
+                <h3>So, someone is joining your Household?</h3>
+                <h5 class="text text-info">Just enter their E-Mail address and we will send them your Household Password!</h5>
 
-
-				<h3 style="color: red">${emailError}</h3>
+				<h4 style="color: #9a79d2">${emailError}</h4>
 
 				<form action="AddMemberServlet.java" method="post">
 
@@ -45,8 +45,7 @@
 
 					<br />
 					<div class="form-group">
-						<label for="invitationText">Please enter a text that will
-							be sent to the person you want to invite:</label>
+						<label for="invitationText">Give your new Household member a warm welcome:</label>
 						<textarea onfocus="this.value=''" class="form-control"
 							id="invitationText" name="invitationText">Enter invitation mail...</textarea>
 					</div>

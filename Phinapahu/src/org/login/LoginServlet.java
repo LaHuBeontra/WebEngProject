@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             else request.getRequestDispatcher("/Essen.jsp").forward(request, response);
         }  
         else{  
-            request.setAttribute("registrationError", "Login was not successful :-[");
+            request.setAttribute("registrationError", "Incorrect username or password!");
         	RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
         	rd.forward(request, response);
 

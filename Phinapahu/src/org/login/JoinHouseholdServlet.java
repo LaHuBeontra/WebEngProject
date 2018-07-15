@@ -46,7 +46,7 @@ public class JoinHouseholdServlet extends HttpServlet {
 		    
 		    request.getSession().setAttribute("userName", userName);
 		    request.getSession().setAttribute("householdName", loginService.getUsersHouseholdName(userName));
-			RequestDispatcher rd = request.getRequestDispatcher("RegisterSuccess.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 			rd.forward(request, response);
 			
 		} else {

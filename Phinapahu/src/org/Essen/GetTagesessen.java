@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.login.LoginService;
+
 /**
  * Servlet implementation class Tagesessen
  */
@@ -23,7 +25,6 @@ public class GetTagesessen extends HttpServlet {
 	 */
 	public GetTagesessen() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,15 +33,17 @@ public class GetTagesessen extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userName = (String) request.getSession().getAttribute("userName");
+		LoginService loginService = new LoginService();
+		request.setAttribute("userName", userName);
+		request.setAttribute("loginService", loginService);
+		
 		Set<EssenBean> getTagesEssen = new TreeSet<EssenBean>();
 		try {
 			 getTagesEssen =  EssenBean.tagesessen();
-			log("Size of TagesessenList: " + getTagesEssen.size());
 			request.setAttribute("getTagesEssen", getTagesEssen);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
@@ -53,9 +56,7 @@ public class GetTagesessen extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
-
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 	}

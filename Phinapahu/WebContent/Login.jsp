@@ -29,12 +29,12 @@
 				<h1 class="text-center">Login</h1>
 
 				<br>
-				<h5 style="color: red">${registrationError}</h5>
+				<h5 style="color: #9a79d2">${registrationError}</h5>
 
 				<form action="LoginServlet" method="post">
 
 					<div class="form-group">
-						<label for="UserName">UserName</label><br />
+						<label for="UserName">Username</label><br />
 						<input class="form-control" name="UserName" type="text" value="${param.UserName}" />
 					</div>
 
@@ -57,11 +57,11 @@
 
 			<div class="jumbotron text-center col-md-6 margin bg-info text-white">
 				<div class="text-center">
-					<h3>Easily manage your household!</h3>
+					<h3>Easily manage cooking in your Household!</h3>
 
-					<br /> Sign up now and create a new household. Send emails to the
-					people you want to invite to your household. Propose meals for your
-					next collective dinner and vote for the meal you're going to cook!
+					<br /> Sign up and create your own Household! Send invites to the people
+					that want to join! Everyone can make meal suggestions for your next
+					cookout and vote for their favourite. Let's see who wins!
 				</div>
 			</div>
 		</div>

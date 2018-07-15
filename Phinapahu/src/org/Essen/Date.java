@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.login.LoginService;
+
 /**
  * Servlet implementation class Date
  */
@@ -26,7 +28,6 @@ public class Date extends HttpServlet {
 
 	public Date() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,11 +37,7 @@ public class Date extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		log("datum request");
-
 	}
 
 	/**
@@ -49,38 +46,39 @@ public class Date extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String dateString = request.getParameter("date");
-		System.out.println(dateString);
+		String userName = (String) request.getSession().getAttribute("userName");
+		LoginService loginService = new LoginService();
+		request.setAttribute("userName", userName);
+		request.setAttribute("loginService", loginService);
+		
 		if (dateString.length() > 0) {
 
 			SimpleDateFormat sdfToDate = new SimpleDateFormat("dd.MM.yyyy");
 			try {
 				sdfToDate.parse(dateString);
-				//log("Datum: " + dateString + " erfolgreich");
-				//File dates = new File("C:/Users/phils/git/WebEngProject/Phinapahu/WebContent/FileEssen/dates.txt");
-
+				
 				File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
-				//"..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt"
 
 				try (PrintWriter pw = new PrintWriter(new FileWriter(dates, true))) {
 					pw.println(dateString);
 				} catch (IOException e) {
-					System.err.println("Fehler beim Schreiben: " + e.getMessage());
+					e.printStackTrace();
 				}
 
 			} catch (ParseException ex2) {
-				log("Fehler bei der Datumsumwandlung: "+dateString);
+				ex2.printStackTrace();
 			}
+			
+			request.setAttribute("essenMessage", "Date added!");
+			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
+			rd.forward(request, response);
 		}
 		else {
-			System.out.println("Das Datum ist leer");
+			request.setAttribute("essenMessage", "You haven't selected a date!");
+			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
-		rd.forward(request, response);
-
-		// dateList.add(date);
-
 	}
 
 }

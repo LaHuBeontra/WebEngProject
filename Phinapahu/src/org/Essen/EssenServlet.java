@@ -32,7 +32,6 @@ public class EssenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	}
@@ -45,8 +44,6 @@ public class EssenServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		log("in post geschafft");
-
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);
 	}

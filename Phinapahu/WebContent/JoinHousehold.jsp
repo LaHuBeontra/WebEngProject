@@ -21,17 +21,13 @@
 
 			<div
 				class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 margin">
-				<h1 class="text-center">Register</h1>
+				<h1 class="text-center">Join Household</h1>
 				<br>
 
-				<h3 style="color: red">${JoinHouseholdError}</h3>
-				<div class="text text-info">Please enter the Password you
-					received!</div>
-				<br>
+				<h3 style="color: #9a79d2">${JoinHouseholdError}</h3>
+				<h5 class="text text-info">Please enter the Household Password you received!</h5>
 				<form action="JoinHouseholdServlet" method="post">
 					<div class=form-group>
-						<label for="HouseholdPassword">Password of Household</label> <br>
-
 						<input class="form-control" name="HouseholdPassword"
 							type="password" value="${param.HouseholdPassword}" />
 

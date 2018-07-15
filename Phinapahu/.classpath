@@ -5,7 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail_1.4.0.v201005080615.jar"/>
-	<classpathentry kind="lib" path="C:/Tools/Tomcat/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hlahr/apache-tomcat-9.0.8/lib/servlet-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>

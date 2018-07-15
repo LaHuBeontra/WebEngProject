@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
+import org.login.LoginService;
 
 /**
  * Servlet implementation class EssenErstellen
@@ -23,7 +23,6 @@ public class EssenErstellen extends HttpServlet {
 	 */
 	public EssenErstellen() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,7 +31,6 @@ public class EssenErstellen extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	/**
@@ -42,6 +40,12 @@ public class EssenErstellen extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+		
+		String userName = (String) request.getSession().getAttribute("userName");
+		LoginService loginService = new LoginService();
+		request.setAttribute("userName", userName);
+		request.setAttribute("loginService", loginService);
+		
 		String dateString = request.getParameter("EssenDate");
 		String essenString = request.getParameter("Essen");
 		System.out.println("dateString: " + dateString + " essenString: " + essenString);
@@ -49,30 +53,28 @@ public class EssenErstellen extends HttpServlet {
 		if (dateString != null && essenString != null) {
 			if (dateString != "") {
 				if (essenString != "") {
-					essenString = essenString.replace(" ", "_");
-					try {
-						EssenBean essen = new EssenBean(dateString, essenString);
-						if (essen.validate()) {
-							essen.saveThis();
-							essenMessage = "Meal successfully added!";
-						}
-					} catch (Exception e) {
-						System.out.println("test");
-						System.err.println(e.getMessage());
+					if (!essenString.contains(";")) {
+					    essenString = essenString.replace(" ", "_");
+					    try {
+						    EssenBean essen = new EssenBean(dateString, essenString);
+						    if (essen.validate()) {
+							    essen.saveThis();
+							    essenMessage = "Meal added!";
+						    }
+					    } catch (Exception e) {
+						    e.printStackTrace();
+					    }
+					} else {
+						essenMessage = "Your meal can't contain a semicolon!";
 					}
 
 				} else {
-					System.out.println("You have to enter a meal!");
 					essenMessage = "You have to enter a meal!";
 				}
-			} else
-
-			{
-				System.out.println("Please select a date!");
+			} else {
 				essenMessage = "Please select a date!";
 			}
 		}
-		System.out.println("essenMessage: "+ essenMessage);
 		request.setAttribute("essenMessage", essenMessage);
 		RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 		rd.forward(request, response);

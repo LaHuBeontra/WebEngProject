@@ -1,6 +1,7 @@
 <%@page import="org.Essen.EssenBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html5>
 <html>
 <head>
@@ -16,21 +17,21 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src = "jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
-
+			
 	<div class="container content">
 		<div class="row">
 			<div
 				class="jumbotron col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 margin">
 
-				<h3>Make dinner suggestions and vote for meals!</h3>
+				<h3>Make meal suggestions and vote for them!</h3>
 
-				<h3 style="color: red">${voteMessage}</h3>
-				<h3 style="color: red">${essenMessage}</h3>
+				<h3 style="color: #9a79d2">${voteMessage}</h3>
+				<h3 style="color: #9a79d2">${essenMessage}</h3>
 
 				<%@ page import="java.util.*"%>
 
@@ -70,14 +71,12 @@
 				<form action="GetDates" method="get">
 					<button name="getDates" class="btn btn-primary btn-block"
 						type="submit">
-						<i class="fa fa-angle-down icon-right"></i> Suggest a meal!
+						<i class="fa fa-angle-down icon-right"></i> Suggest a Meal!
 					</button>
 					<%
-						//List<String> dateList =new ArrayList<String>();
 						Set<String> dateSet = new TreeSet<String>();
 						if ((Set<String>) request.getAttribute("getDateSet") != null) {
 							dateSet = ((Set<String>) request.getAttribute("getDateSet"));
-							// out.print("Array nicht leer");
 						}
 					%>
 
@@ -89,7 +88,7 @@
 						if (dateSet.size() > 0) {
 					%>
 					<div class="text text-info">
-						Select one of the dates you just added and suggest a meal. 
+						Select one of the dates you just added and suggest a meal!
 					</div>
 					
 					<table>
@@ -148,7 +147,7 @@
 					%>
 				</form>
 				<div class="text text-info">
-					You have only one vote per day. <br />
+					You only have one vote per day! <br/>
 				</div>
 
 									<div class="table-striped">
@@ -258,7 +257,18 @@
 					</div>
 				</form>
 			</div>
-
+			
+			<c:choose>
+			    <c:when test="${loginService.isAdmin(userName)}">
+			        <a href="ManagementServlet.java" class ="btn btn-primary" style="font-size: 160%; z-index: 5; position: fixed; top: 1.1%; right: 6%; border-style: solid; border-color: white;">
+					     <i class="fas fa-screwdriver"></i> Go To Management!
+			        </a>
+                </c:when>
+				<c:otherwise>
+				
+                </c:otherwise>
+			</c:choose>
+			
 		</div>
 	</div>
 </div>

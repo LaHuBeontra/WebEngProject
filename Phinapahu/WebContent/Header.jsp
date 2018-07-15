@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container-fluent bg-info bottom5 header">
 	
 		<div class="media">

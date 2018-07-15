@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.login.LoginService;
+
 /**
  * Servlet implementation class Vote
  */
@@ -21,7 +23,6 @@ public class Vote extends HttpServlet {
 	 */
 	public Vote() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -30,7 +31,6 @@ public class Vote extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -40,24 +40,21 @@ public class Vote extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String userName = (String) request.getSession().getAttribute("userName");
+		LoginService loginService = new LoginService();
+		request.setAttribute("userName", userName);
+		request.setAttribute("loginService", loginService);
+		
 		String vote = request.getParameter("vote");
-		// log("vote: " + vote);
 		try {
 			EssenBean essen = new EssenBean(vote);
-			String voteMessage = essen.vote((String) request.getSession().getAttribute("userName"));
+			String voteMessage = essen.vote(userName);
 			request.setAttribute("voteMessage", voteMessage);
 			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-
-		// Aus dem essen und dem datum das essen finden und voten
-		/*RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
-		rd.forward(request, response);
-		*/
 	}
 
 }

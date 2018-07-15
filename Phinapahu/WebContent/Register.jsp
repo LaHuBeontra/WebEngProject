@@ -21,7 +21,7 @@
 				class="jumbotron col-xs-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 margin">
 				<h1 class="text-center">Register</h1>
 				<br>
-				<h5 style="color: red">${registrationError}</h5>
+				<h5 style="color: #9a79d2">${registrationError}</h5>
 				<form action="RegisterServlet" method="post">
 					<div class="form-group">
 

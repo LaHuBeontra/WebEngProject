@@ -22,11 +22,20 @@
 		<div class="row">
 			<div
 				class="jumbotron col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 margin">
-				<h1>Hi ${userName}, this is your household ${householdName}!</h1>
-				<p id="test">How are you doing?</p>
+				<h2>Hi ${userName}, this is your Household, ${householdName}!</h2>
+				<p>We hope you're having a great day! In case you're wondering, this is where you can manage your household.
+				    <ul style="list-style-type: circle">
+				        <li>"Toggle Status" will give a normal member administrator rights, or remove them.</li>
+				        <li>"Delete Member" will delete a member from your household. We hope you won't have to use this too often!</li>
+				        <li>"Add Member" will let you add a new member to your household. Yay!</li>
+				    </ul>
+				</p>
+				
+				<h4 style="color: #9a79d2">${managementError}</h4>
+				<h4 style="color: #9a79d2">${managementMessage}</h4>
 				
 				<div class="table-striped">
-					<table class = "table">
+					<table class="table">
 						<thead>
 							<tr>
 								<th>Household Member</th>
@@ -72,8 +81,8 @@
 											<input type="hidden" name="deleteUser"
 												value="${user}"> 
 
-											<button class = "btn btn-secondary" type="submit" onclick = "return confirm('Are you sure you want to remove ${user} from your Household? :(')">
-											<i class ="fa fa-trash"></i> Delete Member
+											<button class = "btn btn-secondary" type="submit" onclick = "return confirm('Are you sure you want to remove ${user} from your Household?')">
+											<i class ="fa fa-trash"></i> Remove Member
 											</button>
 
 										</form>
@@ -84,16 +93,16 @@
 					</table>
 				</div>
 
-
 				<form action="AddMember.jsp">
-
-					<button class ="btn btn-primary" type ="submit" onclick = "return confirm('Do you want to add a new Member to your Household? :D')">
-					<i class ="fa fa-user-plus"></i> Add Member
+					<button class ="btn btn-primary" type ="submit" onclick = "return confirm('Do you want to add a new Member to your Household?')">
+					<i class="fa fa-user-plus"></i> Add Member
 					</button>
 				</form>
-				<a href="#" class ="btn btn-primary" style="margin-top: 1%; font-size: 170%;">
-					<i class="fas fa-utensils" style="margin-right: 2%"></i> Go To Meals!
-				</a>
+				<form action="${pageContext.request.contextPath}/GoToMealsServlet.java" method="post">
+					<button class ="btn btn-primary" type ="submit" style="margin-top: 1%; font-size: 160%;">
+					    <i class="fas fa-utensils" style="margin-right: 2%"></i> Go To Meals!
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

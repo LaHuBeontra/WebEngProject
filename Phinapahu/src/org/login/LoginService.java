@@ -14,12 +14,9 @@ import java.util.regex.*;
 
 /**
  * This class is responsible for everything related to registering and
- * logging in. It is probably too long, but every method has its own
- * description and a clear name, so things are still easy to find.
- * 
- * Don't judge me.
- * 
- * @author hlahr
+ * logging in. It is probably too long, but refactoring it into multiple
+ * classes would take too long now. Every method has its own description
+ * and a clear name, so things are still easy to find.
  */
 public class LoginService {
 	List<String> userStrings      = new ArrayList<>();
@@ -262,6 +259,7 @@ public class LoginService {
 		return valid;
 	}
 
+	//True if the password belongs to a Household
 	public boolean passwordFitsHousehold(String password) {
 		addHouseholdAndUserNamesToLists(folder);
 		for (String passwordString : passwordStrings) {
@@ -270,6 +268,7 @@ public class LoginService {
 		return false;
 	}
 	
+	//Gets the Household file by its password
 	public File getHouseholdFileByPassword(String password) {
 		for (int i = 0; i <= passwordStrings.size(); i++) {
 			if (passwordStrings.get(i).equals(password)) {

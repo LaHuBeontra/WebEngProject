@@ -24,11 +24,12 @@
 		<div class="row">
 			<div
 				class="jumbotron col-xs-6 col-sm-6 col-md-6 col-lg-7 col-xl-6 margin">
-				<p>Email successfully sent to ${email}!!</p>
+				<h5 style="color: #9a79d2">Email successfully sent to ${email}!</h5>
+				<p>Your new member will surely join soon!</p>
 				<p>
 
 					<a class="btn btn-primary" href="ManagementServlet.java"> <i
-						class="fa fa-arrow-right"> </i> Return to Management Page!
+						class="fa fa-arrow-right"> </i> Return to Management Page
 					</a>
 
 				</p>
