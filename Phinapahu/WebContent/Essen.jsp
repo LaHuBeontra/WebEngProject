@@ -259,7 +259,7 @@
 			</div>
 			
 			<c:choose>
-			    <c:when test="${loginService.isAdmin(userName)}">
+			    <c:when test="${fileService.isAdmin(userName)}">
 			        <a href="ManagementServlet.java" class ="btn btn-primary" style="font-size: 160%; z-index: 5; position: fixed; top: 1.1%; right: 6%; border-style: solid; border-color: white;">
 					     <i class="fas fa-screwdriver"></i> Go To Management!
 			        </a>

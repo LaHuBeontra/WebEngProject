@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class Vote
@@ -41,9 +41,9 @@ public class Vote extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = (String) request.getSession().getAttribute("userName");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		request.setAttribute("userName", userName);
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("fileService", fileService);
 		
 		String vote = request.getParameter("vote");
 		try {
@@ -53,7 +53,7 @@ public class Vote extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

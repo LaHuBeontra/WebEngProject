@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class ManagementServlet
@@ -29,12 +29,12 @@ public class ManagementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = (String) request.getSession().getAttribute("userName");
 		
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		
-		String householdName = loginService.getUsersHouseholdName(userName);
+		String householdName = fileService.getUsersHouseholdName(userName);
 		
-		request.setAttribute("users", loginService.getUsersOfHousehold(householdName));
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("users", fileService.getUsersOfHousehold(householdName));
+		request.setAttribute("fileService", fileService);
 		request.getSession().setAttribute("userName", userName);
 		request.getSession().setAttribute("householdName", householdName);
 		

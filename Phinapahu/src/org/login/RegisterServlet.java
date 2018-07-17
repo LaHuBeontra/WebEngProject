@@ -39,9 +39,9 @@ public class RegisterServlet extends HttpServlet {
         String password  = request.getParameter("Password");
         String household = request.getParameter("Household");
         
-        LoginService loginService = new LoginService();  
+        FileService fileService = new FileService();  
           
-        String error = loginService.checkData(userName, password, email, household);
+        String error = fileService.checkData(userName, password, email, household);
         
         if (error != null && !error.isEmpty()) {
         	//User already exists/is invalid

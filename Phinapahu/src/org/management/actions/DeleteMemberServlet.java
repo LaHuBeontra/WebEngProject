@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class DeleteMemberServlet
@@ -31,12 +31,12 @@ public class DeleteMemberServlet extends HttpServlet {
 		String userName        = request.getParameter("deleteUser");
 		String currentUserName = (String) request.getSession().getAttribute("userName");
 		
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		
 	    //Check if a user is trying to remove himself
 	    if (!userName.equals(currentUserName)) {
 	    	//Remove user
-	        loginService.deleteUser(userName);
+	        fileService.deleteUser(userName);
 	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
 	    } else {
 	    	request.setAttribute("managementError", "You can't delete yourself!");

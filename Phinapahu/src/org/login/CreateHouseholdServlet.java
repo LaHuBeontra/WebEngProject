@@ -48,14 +48,14 @@ public class CreateHouseholdServlet extends HttpServlet {
 		String userPassword = (String) request.getSession().getAttribute("userPassword");
 
 		// Generate random password
-		LoginService loginService = new LoginService();
-		String householdPassword = loginService.generatePassword();
+		FileService fileService = new FileService();
+		String householdPassword = fileService.generatePassword();
 
 		// Store Household to FileSystem
 		String householdName = request.getParameter("HouseholdName");
 
 		// Check if Household already exists
-		if (loginService.listContainsHousehold(request.getParameter("HouseholdName"))) {
+		if (fileService.listContainsHousehold(request.getParameter("HouseholdName"))) {
 			request.setAttribute("createHouseholdError", "Household already exists, please enter a different name!");
 			RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
 			rd.forward(request, response);
@@ -83,9 +83,7 @@ public class CreateHouseholdServlet extends HttpServlet {
 					if (paramValues.length == 1) {
 						String paramValue = paramValues[0];
 						if (paramValue.length() == 0) {
-							request.setAttribute("emailMissing", "not all emails were entered");
-							RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
-							rd.forward(request, response);
+							request.setAttribute("emailMissing", "Not all E-Mails were entered!");
 						} else {
 							emails[count++] = paramValue;
 
@@ -100,15 +98,15 @@ public class CreateHouseholdServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
 				rd.forward(request, response);
 			} else {
-				boolean valid = loginService.areEmailsValid(emails);
+				boolean valid = fileService.areEmailsValid(emails);
 				if (valid) {
-					loginService.createHousehold(householdName, userName, userPassword, householdPassword);
+					fileService.createHousehold(householdName, userName, userPassword, householdPassword);
 					EmailService emailService = new EmailService();
 					emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
 							request.getParameter("invitationText"), householdPassword);
 					request.getSession().setAttribute("userName", userName);
 					request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
-
+					
 				} else {
 					request.setAttribute("emailMissing", "Please check that all entered email addresses are valid");
 					RequestDispatcher rd = request.getRequestDispatcher("CreateHousehold.jsp");
@@ -117,6 +115,5 @@ public class CreateHouseholdServlet extends HttpServlet {
 			}
 
 		}
-
 	}
 }

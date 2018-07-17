@@ -38,15 +38,15 @@ public class LoginServlet extends HttpServlet {
 	    String userName = request.getParameter("UserName");
         String password = request.getParameter("Password");
           
-        LoginService loginService = new LoginService();
+        FileService fileService = new FileService();
           
-        if(loginService.validate(userName, password)){  
+        if(fileService.validate(userName, password)){  
         	//Add user to session variable
 			request.getSession().setAttribute("userName", userName);
 	
 			//Redirect to Management.jsp if user is admin
 
-            if (loginService.userIsAdmin(userName)) request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
+            if (fileService.userIsAdmin(userName)) request.getRequestDispatcher("/ManagementServlet.java").forward(request, response);
             else request.getRequestDispatcher("/Essen.jsp").forward(request, response);
         }  
         else{  

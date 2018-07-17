@@ -37,15 +37,15 @@ public class JoinHouseholdServlet extends HttpServlet {
 		String householdPassword  = request.getParameter("HouseholdPassword");
 		String userName           = (String) request.getSession().getAttribute("userName");
 		String userPassword       = (String) request.getSession().getAttribute("userPassword");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		
 		//Check if there is a household with this password
-		if (loginService.passwordFitsHousehold(householdPassword)) {
+		if (fileService.passwordFitsHousehold(householdPassword)) {
 			
-			loginService.joinHousehold(userName, userPassword, householdPassword);
+			fileService.joinHousehold(userName, userPassword, householdPassword);
 		    
 		    request.getSession().setAttribute("userName", userName);
-		    request.getSession().setAttribute("householdName", loginService.getUsersHouseholdName(userName));
+		    request.getSession().setAttribute("householdName", fileService.getUsersHouseholdName(userName));
 			RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
 			rd.forward(request, response);
 			

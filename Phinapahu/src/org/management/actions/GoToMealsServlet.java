@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class GoToMealsServlet
@@ -37,10 +37,10 @@ public class GoToMealsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = (String) request.getSession().getAttribute("userName");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		
 		request.setAttribute("userName", userName);
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("fileService", fileService);
     	RequestDispatcher rd = request.getRequestDispatcher("Essen.jsp");
     	rd.forward(request, response);
 	}

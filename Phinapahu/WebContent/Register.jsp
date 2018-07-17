@@ -25,13 +25,13 @@
 				<form action="RegisterServlet" method="post">
 					<div class="form-group">
 
-						<label for="UserName">Name</label><br /> <input
+						<label for="UserName">Username</label><br /> <input
 							class="form-control" name="UserName" type="text"
 							value="${param.UserName}" />
 					</div>
 					<div class="form-group">
 
-						<label for="Email">Email</label><br /> <input
+						<label for="Email">E-Mail</label><br /> <input
 							class="form-control" name="Email" type="email"
 							value="${param.Email}" />
 					</div>

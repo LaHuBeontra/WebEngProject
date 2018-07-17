@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class EssenErstellen
@@ -42,13 +42,12 @@ public class EssenErstellen extends HttpServlet {
 		doGet(request, response);
 		
 		String userName = (String) request.getSession().getAttribute("userName");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		request.setAttribute("userName", userName);
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("fileService", fileService);
 		
 		String dateString = request.getParameter("EssenDate");
 		String essenString = request.getParameter("Essen");
-		System.out.println("dateString: " + dateString + " essenString: " + essenString);
 		String essenMessage = null;
 		if (dateString != null && essenString != null) {
 			if (dateString != "") {

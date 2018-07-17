@@ -23,13 +23,12 @@
 			<div
 				class="jumbotron col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 margin">
 				<h2>Hi ${userName}, this is your Household, ${householdName}!</h2>
-				<p>We hope you're having a great day! In case you're wondering, this is where you can manage your household.
-				    <ul style="list-style-type: circle">
-				        <li>"Toggle Status" will give a normal member administrator rights, or remove them.</li>
-				        <li>"Delete Member" will delete a member from your household. We hope you won't have to use this too often!</li>
-				        <li>"Add Member" will let you add a new member to your household. Yay!</li>
-				    </ul>
-				</p>
+				<p>We hope you're having a great day! In case you're wondering, this is where you can manage your household.</p>
+				<ul style="list-style-type: circle">
+				    <li>"Toggle Status" will give a normal member administrator rights, or remove them.</li>
+				    <li>"Delete Member" will delete a member from your household. We hope you won't have to use this too often!</li>
+				    <li>"Add Member" will let you add a new member to your household. Yay!</li>
+			    </ul>
 				
 				<h4 style="color: #9a79d2">${managementError}</h4>
 				<h4 style="color: #9a79d2">${managementMessage}</h4>
@@ -52,7 +51,7 @@
 
 									<!-- Second column: Status of member (Admin or normal Member) -->
 									<td><c:choose>
-											<c:when test="${loginService.isAdmin(user)}">
+											<c:when test="${fileService.isAdmin(user)}">
 
                      Admin
                      </c:when>

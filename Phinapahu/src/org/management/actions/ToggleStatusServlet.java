@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class ToggleStatusServlet
@@ -31,13 +31,13 @@ public class ToggleStatusServlet extends HttpServlet {
 	    String userName        = request.getParameter("toggleUser");
 		String currentUserName = (String) request.getSession().getAttribute("userName");
 	    
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		
 	    //Check if a user is trying to change his own status
 	    if (!userName.equals(currentUserName)) {
 	    	//Change Status of user
-	    	String status = loginService.getStatusFromUser(userName);
-	        loginService.changeStatus(userName, status);
+	    	String status = fileService.getStatusFromUser(userName);
+	        fileService.changeStatus(userName, status);
 	        response.sendRedirect("/Phinapahu/ManagementServlet.java");
 	    } else {
 	    	request.setAttribute("managementError", "You can't change your own Status!");

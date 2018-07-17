@@ -18,7 +18,7 @@ import java.util.regex.*;
  * classes would take too long now. Every method has its own description
  * and a clear name, so things are still easy to find.
  */
-public class LoginService {
+public class FileService {
 	List<String> userStrings      = new ArrayList<>();
 	List<String> householdStrings = new ArrayList<>();
 	List<String> passwordStrings  = new ArrayList<>();
@@ -26,7 +26,7 @@ public class LoginService {
 	final File   folder           = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileSystem");
 
 
-	public LoginService() {
+	public FileService() {
 		//Fetch List of Users/ Households from FileSystem
 		addHouseholdAndUserNamesToLists(folder);
 	}

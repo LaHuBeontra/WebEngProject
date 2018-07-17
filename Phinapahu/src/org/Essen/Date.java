@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class Date
@@ -48,9 +48,9 @@ public class Date extends HttpServlet {
 			throws ServletException, IOException {
 		String dateString = request.getParameter("date");
 		String userName = (String) request.getSession().getAttribute("userName");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		request.setAttribute("userName", userName);
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("fileService", fileService);
 		
 		if (dateString.length() > 0) {
 

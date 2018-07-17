@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.login.EmailService;
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class AddMemberServlet
@@ -35,16 +35,16 @@ public class AddMemberServlet extends HttpServlet {
 	    String[] emails      = new String[1];
 	    emails[0]            = email;
 	    
-	    LoginService loginService = new LoginService();
+	    FileService fileService = new FileService();
 	    
-	    String password = loginService.getHouseholdPassword(householdName);
+	    String password = fileService.getHouseholdPassword(householdName);
 	    
 	    if (email.isEmpty()) {
 			request.setAttribute("emailError", "Please enter recipient's email adress!");
 			RequestDispatcher rd = request.getRequestDispatcher("AddMember.jsp");
 			rd.forward(request, response);
 		} else {
-			if (loginService.areEmailsValid(emails)) {
+			if (fileService.areEmailsValid(emails)) {
 				EmailService emailService = new EmailService();
 				emailService.sendInvitationMail(emails, "noreply.phinapahu@gmail.com",
 						request.getParameter("invitationText"), password);

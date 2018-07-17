@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.login.LoginService;
+import org.login.FileService;
 
 /**
  * Servlet implementation class GetDates
@@ -34,9 +34,9 @@ public class GetDates extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = (String) request.getSession().getAttribute("userName");
-		LoginService loginService = new LoginService();
+		FileService fileService = new FileService();
 		request.setAttribute("userName", userName);
-		request.setAttribute("loginService", loginService);
+		request.setAttribute("fileService", fileService);
 		
 		Set<String> getDateSet = new TreeSet<String>();
 		File dates = new File("..\\git\\WebEngProject\\Phinapahu\\WebContent\\FileEssen\\dates.txt");
